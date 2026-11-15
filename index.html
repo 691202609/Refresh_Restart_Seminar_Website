@@ -968,8 +968,7 @@
             "LINE_ALBUM_สัมมนา 181069_261115_36.jpg",
             "LINE_ALBUM_สัมมนา 181069_261115_37.jpg",
             "LINE_ALBUM_สัมมนา 181069_261115_38.jpg"];
-        const grid = document.getElementById('galleryGrid');
-        const grid = document.getElementById('galleryGrid');
+        const grid = document.getElementById('galleryGrid');        
         photos.forEach(file => {const b = document.createElement('button'); const im = document.createElement('img'); im.src = 'assets/gallery/' + file; im.alt = 'ภาพกิจกรรมสัมมนา ' + file; im.loading = 'lazy'; b.appendChild(im); b.onclick = () => {document.getElementById('lightboxImg').src = im.src; document.getElementById('lightbox').classList.add('open')}; grid.appendChild(b)});
         function printSection(id) {const el = document.getElementById(id); const w = window.open('', '_blank'); w.document.write('<html lang="th"><meta charset="utf-8"><title>รายละเอียดโครงการ</title><body style="font-family:sans-serif;line-height:1.8;padding:30px">' + el.innerHTML + '</body></html>'); w.document.close(); w.print()}
         ['registration', 'evaluation'].forEach(id => document.getElementById(id).addEventListener('submit', e => {e.preventDefault(); const obj = Object.fromEntries(new FormData(e.target).entries()); const key = 'rr_' + id; const rows = JSON.parse(localStorage.getItem(key) || '[]'); rows.push({...obj, savedAt: new Date().toISOString()}); localStorage.setItem(key, JSON.stringify(rows)); alert('บันทึกข้อมูลในเบราว์เซอร์นี้แล้ว (' + rows.length + ' รายการ)'); e.target.reset()}));
