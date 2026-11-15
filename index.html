@@ -514,6 +514,22 @@
             color: var(--teal)
         }
 
+        #team .avatar {
+            position: relative;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        #team .avatar img {
+            position: absolute;
+            inset: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            object-fit: cover;
+        }
+
         footer {
             background: #173d3b;
             color: #eaf3ed;
@@ -680,7 +696,8 @@
                         </div>
                         <div
                             style="display:flex;justify-content:space-between;margin-top:14px;font-size:13px;color:#526b63">
-                            <b>11 OCT 2026</b><b>ITD481 · TEAM B</b></div>
+                            <b>11 OCT 2026</b><b>ITD481 · TEAM B</b>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -759,29 +776,34 @@
                     <div class="doc">
                         <div class="ico">📘</div>
                         <h3>โครงการสัมมนา</h3>
-                        <p>ที่มา วัตถุประสงค์ กลุ่มเป้าหมาย และแผนการดำเนินกิจกรรม</p><a href="the_stress_bucket.html">ดูหัวข้อเนื้อหา</a><button
-                            onclick="printSection('project')"> เปิด </button>
+                        <p>ที่มา วัตถุประสงค์ กลุ่มเป้าหมาย และแผนการดำเนินกิจกรรม</p><a
+                            href="the_stress_bucket.html">ดูหัวข้อเนื้อหา</a><button onclick="printSection('project')">
+                            เปิด </button>
                     </div>
                     <div class="doc">
                         <div class="ico">🖥️</div>
                         <h3>สไลด์การสัมมนา</h3>
-                        <p>เนื้อหา Stress Bucket, Burnout และ Team Boundaries</p><a href="Refresh _ Restart Presentation.pdf">ดูหัวข้อเนื้อหา</a>
+                        <p>เนื้อหา Stress Bucket, Burnout และ Team Boundaries</p><a
+                            href="Refresh _ Restart Presentation.pdf">ดูหัวข้อเนื้อหา</a>
                     </div>
                     <div class="doc">
                         <div class="ico">📝</div>
                         <h3>รายงานการประชุม</h3>
-                        <p>สรุปประเด็นแลกเปลี่ยนและข้อตกลงของทีม</p><a href="รายงานผลการอบรมเชิงปฏิบัติการ Refresh & Restart (1).pdf">ดูส่วนสรุปกิจกรรม</a>
+                        <p>สรุปประเด็นแลกเปลี่ยนและข้อตกลงของทีม</p><a
+                            href="รายงานผลการอบรมเชิงปฏิบัติการ Refresh & Restart (1).pdf">ดูส่วนสรุปกิจกรรม</a>
                     </div>
                     <div class="doc">
                         <div class="ico">🧾</div>
                         <h3>ฟอร์มลงทะเบียน</h3>
-                        <p>บันทึกข้อมูลผู้เข้าร่วมสัมมนา</p><a href="https://docs.google.com/forms/d/e/1FAIpQLSccKMfBh4UPxGhCBS6o47S2B9ljIVK6M20VDSdaXK6R0kDnMw/viewform">กรอกแบบฟอร์ม</a>
+                        <p>บันทึกข้อมูลผู้เข้าร่วมสัมมนา</p><a
+                            href="https://docs.google.com/forms/d/e/1FAIpQLSccKMfBh4UPxGhCBS6o47S2B9ljIVK6M20VDSdaXK6R0kDnMw/viewform">กรอกแบบฟอร์ม</a>
                     </div>
                     <div class="doc">
                         <div class="ico">⭐</div>
                         <h3>ฟอร์มประเมินการสัมมนา</h3>
-                        <p>ประเมินประสบการณ์และข้อเสนอแนะหลังเข้าร่วม</p><a href="https://docs.google.com/forms/d/e/1FAIpQLSfPBBqzhvRDilCwSoNlKMODI7_BXW2SZ-9MCVATXLB0X05YpA/formResponse">กรอกแบบประเมิน</a>
-                    </div>                    
+                        <p>ประเมินประสบการณ์และข้อเสนอแนะหลังเข้าร่วม</p><a
+                            href="https://docs.google.com/forms/d/e/1FAIpQLSfPBBqzhvRDilCwSoNlKMODI7_BXW2SZ-9MCVATXLB0X05YpA/formResponse">กรอกแบบประเมิน</a>
+                    </div>
                 </div>
                 <div class="notice">หมายเหตุ: ในไฟล์แนบมีข้อมูลใบงานและภาพกิจกรรม แต่ยังไม่มีไฟล์สไลด์ฉบับจริง โครงการ
                     PDF รายงานการประชุม หรือผลแบบทดสอบก่อน–หลัง หน้านี้จึงจัดเตรียมส่วนแสดงผลและแบบฟอร์มตัวอย่างไว้
@@ -794,8 +816,8 @@
                     <p><b>ผลที่คาดหวัง:</b> ผู้เข้าร่วมรู้จักการบริหารความเครียด ปรับสมดุลชีวิตและงาน
                         และนำแนวทางไปใช้ได้จริง</p>
                 </div>
-                
-                
+
+
             </div>
         </section>
         <section class="section altbg" id="results">
@@ -861,7 +883,10 @@
                     <p class="lead">ทีมผู้จัดทำโครงการสัมมนาย่อย รายวิชา ITD481</p>
                 </div>
                 <div class="card team">
-                    <div class="avatar">B</div>
+                    <div class="avatar" aria-hidden="true">
+                        <span>B</span>
+                        <img src="./images/team-1.jpg" alt="" width="54" height="54" loading="lazy" onerror="this.remove()">
+                    </div>
                     <div>
                         <h3 style="margin:0">Team B</h3>
                         <p style="margin:2px 0;color:var(--muted)">นายสุริยาพงษ์ แสนบ้าน : 691202609 (ประธาน)
@@ -869,37 +894,49 @@
                     </div>
                 </div>
                 <div class="card team">
-                    <div class="avatar">B</div>
+                    <div class="avatar" aria-hidden="true">
+                        <span>B</span>
+                        <img src="./images/team-2.jpg" alt="" width="54" height="54" loading="lazy" onerror="this.remove()">
+                    </div>
                     <div>
                         <h3 style="margin:0">Team B</h3>
-                        <p style="margin:2px 0;color:var(--muted)">นายจีระศักดิ์ สาระจันทร์ : 681202128 (รองประธาน) 
+                        <p style="margin:2px 0;color:var(--muted)">นายจีระศักดิ์ สาระจันทร์ : 681202128 (รองประธาน)
                         </p>
                     </div>
                 </div>
                 <div class="card team">
-                    <div class="avatar">B</div>
+                    <div class="avatar" aria-hidden="true">
+                        <span>B</span>
+                        <img src="./images/team-3.jpg.png" alt="" width="54" height="54" loading="lazy" onerror="this.remove()">
+                    </div>
                     <div>
                         <h3 style="margin:0">Team B</h3>
                         <p style="margin:2px 0;color:var(--muted)">นายนลธวัช ฤกษ์เนตรี 681203661 (เลขา)
                         </p>
                     </div>
-                </div><div class="card team">
-                    <div class="avatar">B</div>
+                </div>
+                <div class="card team">
+                    <div class="avatar" aria-hidden="true">
+                        <span>B</span>
+                        <img src="./images/team-4.jpg" alt="" width="54" height="54" loading="lazy" onerror="this.remove()">
+                    </div>
                     <div>
                         <h3 style="margin:0">Team B</h3>
-                        <p style="margin:2px 0;color:var(--muted)">นายกฤษดา ศรีรักษา 691201695 (เหรัญิก)
+                        <p style="margin:2px 0;color:var(--muted)">นายกฤษดา ศรีรักษา 691201695 (เหรัญญิก)
                         </p>
                     </div>
-                </div><div class="card team">
-                    <div class="avatar">B</div>
+                </div>
+                <div class="card team">
+                    <div class="avatar" aria-hidden="true">
+                        <span>B</span>
+                        <img src="./images/team-5.jpg" alt="" width="54" height="54" loading="lazy" onerror="this.remove()">
+                    </div>
                     <div>
                         <h3 style="margin:0">Team B</h3>
                         <p style="margin:2px 0;color:var(--muted)">นายวรชัย ผิวขาว 691202609 (ปฏิคม)
                         </p>
                     </div>
                 </div>
-                <p class="smallnote">ไฟล์ข้อมูลต้นทางระบุชื่อผู้จัดทำเป็น “Team B” เท่านั้น
-                    หากต้องการแสดงรายชื่อสมาชิกแต่ละคน กรุณาเพิ่มชื่อและหน้าที่ของสมาชิกในส่วนนี้</p>
             </div>
         </section>
         <section class="section altbg" id="contact">
@@ -968,12 +1005,12 @@
             "LINE_ALBUM_สัมมนา 181069_261115_36.jpg",
             "LINE_ALBUM_สัมมนา 181069_261115_37.jpg",
             "LINE_ALBUM_สัมมนา 181069_261115_38.jpg"];
-        const grid = document.getElementById('galleryGrid');        
+        const grid = document.getElementById('galleryGrid');
         photos.forEach(file => {const b = document.createElement('button'); const im = document.createElement('img'); im.src = 'assets/gallery/' + file; im.alt = 'ภาพกิจกรรมสัมมนา ' + file; im.loading = 'lazy'; b.appendChild(im); b.onclick = () => {document.getElementById('lightboxImg').src = im.src; document.getElementById('lightbox').classList.add('open')}; grid.appendChild(b)});
         function printSection(id) {const el = document.getElementById(id); const w = window.open('', '_blank'); w.document.write('<html lang="th"><meta charset="utf-8"><title>รายละเอียดโครงการ</title><body style="font-family:sans-serif;line-height:1.8;padding:30px">' + el.innerHTML + '</body></html>'); w.document.close(); w.print()}
         ['registration', 'evaluation'].forEach(id => document.getElementById(id).addEventListener('submit', e => {e.preventDefault(); const obj = Object.fromEntries(new FormData(e.target).entries()); const key = 'rr_' + id; const rows = JSON.parse(localStorage.getItem(key) || '[]'); rows.push({...obj, savedAt: new Date().toISOString()}); localStorage.setItem(key, JSON.stringify(rows)); alert('บันทึกข้อมูลในเบราว์เซอร์นี้แล้ว (' + rows.length + ' รายการ)'); e.target.reset()}));
         document.getElementById('quizForm').addEventListener('submit', e => {e.preventDefault(); const f = new FormData(e.target); if (!f.get('q1') || !f.get('q2') || !f.get('q3')) {alert('กรุณาตอบคำถามให้ครบ'); return } const score = ['q1', 'q2', 'q3'].reduce((s, k) => s + Number(f.get(k)), 0); document.getElementById('quizResult').textContent = 'คะแนน ' + score + '/3 · ' + f.get('phase')});
-        
+
     </script>
 </body>
 
