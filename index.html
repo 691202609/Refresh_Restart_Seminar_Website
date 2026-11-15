@@ -929,7 +929,46 @@
     <div class="lightbox" id="lightbox" onclick="this.classList.remove('open')"><button aria-label="ปิด">×</button><img
             alt="ภาพบรรยากาศสัมมนา" id="lightboxImg"></div>
     <script>
-        const photos = ["LINE_ALBUM_สัมมนา 181069_261115_1.jpg", "LINE_ALBUM_สัมมนา 181069_261115_2.jpg", "LINE_ALBUM_สัมมนา 181069_261115_3.jpg", "LINE_ALBUM_สัมมนา 181069_261115_4.jpg", "LINE_ALBUM_สัมมนา 181069_261115_5.jpg", "LINE_ALBUM_สัมมนา 181069_261115_6.jpg", "LINE_ALBUM_สัมมนา 181069_261115_7.jpg", "LINE_ALBUM_สัมมนา 181069_261115_8.jpg", "LINE_ALBUM_สัมมนา 181069_261115_9.jpg", "LINE_ALBUM_สัมมนา 181069_261115_10.jpg", "LINE_ALBUM_สัมมนา 181069_261115_11.jpg", "LINE_ALBUM_สัมมนา 181069_261115_12.jpg", "LINE_ALBUM_สัมมนา 181069_261115_13.jpg", "LINE_ALBUM_สัมมนา 181069_261115_14.jpg", "LINE_ALBUM_สัมมนา 181069_261115_15.jpg", "LINE_ALBUM_สัมมนา 181069_261115_16.jpg", "LINE_ALBUM_สัมมนา 181069_261115_17.jpg", "LINE_ALBUM_สัมมนา 181069_261115_18.jpg", "LINE_ALBUM_สัมมนา 181069_261115_19.jpg", "LINE_ALBUM_สัมมนา 181069_261115_20.jpg", "LINE_ALBUM_สัมมนา 181069_261115_21.jpg", "LINE_ALBUM_สัมมนา 181069_261115_22.jpg", "LINE_ALBUM_สัมมนา 181069_261115_23.jpg", "LINE_ALBUM_สัมมนา 181069_261115_24.jpg", "LINE_ALBUM_สัมมนา 181069_261115_25.jpg", "LINE_ALBUM_สัมมนา 181069_261115_26.jpg", "LINE_ALBUM_สัมมนา 181069_261115_27.jpg", "LINE_ALBUM_สัมมนา 181069_261115_28.jpg", "LINE_ALBUM_สัมมนา 181069_261115_29.jpg", "LINE_ALBUM_สัมมนา 181069_261115_30.jpg", "LINE_ALBUM_สัมมนา 181069_261115_31.jpg"];
+        const photos = [
+            "LINE_ALBUM_สัมมนา 181069_261115_1.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_2.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_3.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_4.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_5.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_6.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_7.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_8.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_9.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_10.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_11.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_12.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_13.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_14.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_15.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_16.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_17.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_18.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_19.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_20.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_21.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_22.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_23.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_24.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_25.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_26.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_27.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_28.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_29.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_30.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_31.jpg", 
+            "LINE_ALBUM_สัมมนา 181069_261115_32.jpg",
+            "LINE_ALBUM_สัมมนา 181069_261115_33.jpg",
+            "LINE_ALBUM_สัมมนา 181069_261115_34.jpg",
+            "LINE_ALBUM_สัมมนา 181069_261115_35.jpg",
+            "LINE_ALBUM_สัมมนา 181069_261115_36.jpg",
+            "LINE_ALBUM_สัมมนา 181069_261115_37.jpg",
+            "LINE_ALBUM_สัมมนา 181069_261115_38.jpg"];
+        const grid = document.getElementById('galleryGrid');
         const grid = document.getElementById('galleryGrid');
         photos.forEach(file => {const b = document.createElement('button'); const im = document.createElement('img'); im.src = 'assets/gallery/' + file; im.alt = 'ภาพกิจกรรมสัมมนา ' + file; im.loading = 'lazy'; b.appendChild(im); b.onclick = () => {document.getElementById('lightboxImg').src = im.src; document.getElementById('lightbox').classList.add('open')}; grid.appendChild(b)});
         function printSection(id) {const el = document.getElementById(id); const w = window.open('', '_blank'); w.document.write('<html lang="th"><meta charset="utf-8"><title>รายละเอียดโครงการ</title><body style="font-family:sans-serif;line-height:1.8;padding:30px">' + el.innerHTML + '</body></html>'); w.document.close(); w.print()}
