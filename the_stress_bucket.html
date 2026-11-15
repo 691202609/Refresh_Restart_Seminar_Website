@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth scroll-pt-20">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fffdf5">
+    <title>โครงการสัมมนา | Refresh & Restart: The Stress Bucket</title>
+    <!-- Google Fonts: Kanit, Playfair Display, Prompt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600;1,700&family=Prompt:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        paper: '#fffdf5',
+                        cream: '#f5f0e4',
+                        sand: '#e8e0ce',
+                        forest: '#287c68',
+                        sage: '#45a58d',
+                        mint: '#dff2e9',
+                        coral: '#f18f83',
+                        coraldark: '#db756b',
+                        skywater: '#4a9ed4',
+                        ink: '#20221f',
+                        muted: '#69716a',
+                    },
+                    fontFamily: {
+                        prompt: ['Prompt', 'sans-serif'],
+                        kanit: ['Kanit', 'sans-serif'],
+                        playfair: ['"Playfair Display"', 'serif'],
+                    },
+                    boxShadow: {
+                        soft: '0 18px 55px rgba(91, 110, 85, 0.08)',
+                        card: '0 10px 30px rgba(40, 124, 104, 0.06)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body
+    class="bg-paper text-ink font-prompt leading-relaxed antialiased selection:bg-mint selection:text-forest print:bg-white">
+
+    <!-- Toast Notification (แทนการใช้ alert) -->
+    <div id="toastBanner" role="status" aria-live="polite"
+        class="fixed bottom-5 right-5 z-50 hidden items-center gap-3 rounded-2xl bg-forest px-5 py-3.5 text-sm font-medium text-white shadow-xl transition-all duration-300 print:hidden">
+        <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/20 text-xs">✓</span>
+        <span id="toastMessage">ดำเนินการเรียบร้อยแล้ว</span>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 z-30 border-b border-sand bg-paper/90 backdrop-blur-md print:hidden">
+        <div class="mx-auto flex h-16 w-[92%] max-w-6xl items-center justify-between gap-4">
+            <a href="index.html" class="flex items-center gap-2 font-kanit text-lg font-bold tracking-wide text-forest">
+                <span class="inline-block h-3 w-3 rounded-full bg-coral"></span>
+                <span>R&R ● SEMINAR</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden items-center gap-6 text-sm font-medium text-[#58645d] lg:flex">
+                <a href="#proposal" class="transition-colors hover:text-forest">ที่มาและวัตถุประสงค์</a>
+                <a href="#target" class="transition-colors hover:text-forest">กลุ่มเป้าหมาย</a>
+                <a href="#schedule" class="transition-colors hover:text-forest">แผนการดำเนินกิจกรรม</a>
+                <a href="#concept" class="transition-colors hover:text-forest">โมเดลถังความเครียด</a>
+                <a href="#steps" class="transition-colors hover:text-forest">ขั้นตอน Workshop</a>
+                <a href="#team" class="transition-colors hover:text-forest">กติกาทีม</a>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <button type="button" onclick="window.print()"
+                    class="hidden items-center gap-1.5 rounded-full border border-sand bg-white px-4 py-2 text-xs font-semibold text-forest shadow-sm transition hover:border-forest hover:bg-mint/40 sm:inline-flex">
+                    <span>🖨️</span>
+                    <span>พิมพ์เอกสาร</span>
+                </button>
+                <button id="mobileMenuBtn" type="button" aria-label="เปิดเมนูนำทาง"
+                    class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-sand bg-white text-forest lg:hidden">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobileMenu" class="hidden border-t border-sand bg-paper px-6 py-4 lg:hidden">
+            <div class="flex flex-col gap-3 text-sm font-medium text-[#58645d]">
+                <a href="#proposal" class="mobile-link py-1.5 hover:text-forest">01 · ที่มาและวัตถุประสงค์</a>
+                <a href="#target" class="mobile-link py-1.5 hover:text-forest">02 · กลุ่มเป้าหมายและรูปแบบ</a>
+                <a href="#schedule" class="mobile-link py-1.5 hover:text-forest">03 · แผนการดำเนินกิจกรรม</a>
+                <a href="#concept" class="mobile-link py-1.5 hover:text-forest">04 · โมเดลถังความเครียด</a>
+                <a href="#steps" class="mobile-link py-1.5 hover:text-forest">05 · ขั้นตอน Workshop</a>
+                <a href="#team" class="mobile-link py-1.5 hover:text-forest">06 · ตารางกติกาทีม</a>
+                <button type="button" onclick="window.print()"
+                    class="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-forest px-4 py-2.5 text-xs font-semibold text-white">
+                    <span>🖨️ พิมพ์เอกสารโครงการ</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="top" class="relative overflow-hidden py-14 md:py-20 print:py-8">
+        <div class="mx-auto grid w-[92%] max-w-6xl grid-cols-1 items-center gap-10 lg:grid-cols-12">
+            <!-- Left Text -->
+            <div class="lg:col-span-7">
+                <div
+                    class="inline-flex items-center gap-2 rounded-full border border-sage/30 bg-mint/70 px-3.5 py-1 text-xs font-bold tracking-widest text-forest uppercase">
+                    <span>SEMINAR PROJECT · SELF-CARE WORKSHOP</span>
+                </div>
+
+                <h1
+                    class="mt-4 font-playfair text-5xl font-bold italic leading-[0.98] tracking-tight text-forest sm:text-6xl lg:text-7xl">
+                    The Stress<br>Bucket
+                </h1>
+
+                <p class="mt-3 font-kanit text-xl font-semibold text-forest sm:text-2xl md:text-3xl">
+                    ถังความเครียด — รู้ทัน เติมให้ถูก ระบายให้เป็น
+                </p>
+
+                <p class="mt-4 max-w-xl text-base text-muted sm:text-lg">
+                    โครงการสัมมนาเชิงปฏิบัติการเพื่อการดูแลสุขภาวะทางใจ ผ่านภาพเปรียบเทียบ <strong>“ถังน้ำ”</strong>
+                    ที่มีน้ำไหลเข้าจากความกดดันและมีก๊อกสำหรับระบายออก
+                    พร้อมร่วมกันออกแบบกติกาการทำงานที่ช่วยไม่ให้ถังของเพื่อนในทีมล้น
+                </p>
+
+                <!-- Tags / Chips -->
+                <div class="mt-6 flex flex-wrap gap-2.5">
+                    <span class="rounded-full bg-mint px-4 py-1.5 text-xs font-semibold text-forest sm:text-sm">
+                        🧠 รู้จักความเครียด
+                    </span>
+                    <span class="rounded-full bg-mint px-4 py-1.5 text-xs font-semibold text-forest sm:text-sm">
+                        🌿 ค้นหาวิธีฮีลใจ
+                    </span>
+                    <span class="rounded-full bg-mint px-4 py-1.5 text-xs font-semibold text-forest sm:text-sm">
+                        🤝 สร้าง Team Boundaries
+                    </span>
+                </div>
+
+                <!-- Quick Summary Box -->
+                <div
+                    class="mt-8 grid grid-cols-3 gap-3 rounded-2xl border border-sand bg-white/90 p-4 shadow-card sm:max-w-lg">
+                    <div class="border-r border-sand pr-2">
+                        <div class="text-[11px] font-medium text-muted">กลุ่มเป้าหมาย</div>
+                        <div class="mt-0.5 font-kanit text-sm font-semibold text-forest sm:text-base">10 คน (2 กลุ่ม)
+                        </div>
+                    </div>
+                    <div class="border-r border-sand px-2">
+                        <div class="text-[11px] font-medium text-muted">ระยะเวลา</div>
+                        <div class="mt-0.5 font-kanit text-sm font-semibold text-forest sm:text-base">2 ชม. 30 นาที
+                        </div>
+                    </div>
+                    <div class="pl-2">
+                        <div class="text-[11px] font-medium text-muted">รูปแบบ</div>
+                        <div class="mt-0.5 font-kanit text-sm font-semibold text-forest sm:text-base">Workshop</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Illustration -->
+            <div class="lg:col-span-5">
+                <div
+                    class="relative grid min-h-[320px] place-items-center rounded-[46%_54%_45%_55%/52%_44%_56%_48%] bg-[#f7f2e6] p-6 shadow-soft sm:min-h-[380px]">
+                    <span aria-hidden="true" class="absolute right-8 top-4 select-none text-4xl text-[#d7cbb3]">✳</span>
+                    <span aria-hidden="true"
+                        class="absolute bottom-4 left-7 -rotate-12 select-none text-4xl text-[#d7cbb3]">〰</span>
+
+                    <!-- Floating Mini Badges -->
+                    <div
+                        class="absolute -left-2 top-8 hidden rounded-2xl border border-coral/30 bg-white px-3.5 py-2 text-xs font-semibold text-coraldark shadow-md sm:block">
+                        🟥 ความเครียดสะสม
+                    </div>
+                    <div
+                        class="absolute -right-2 bottom-10 hidden rounded-2xl border border-sage/30 bg-white px-3.5 py-2 text-xs font-semibold text-forest shadow-md sm:block">
+                        🟩 ก๊อกระบายฮีลใจ
+                    </div>
+
+                    <svg class="h-auto w-full max-w-[390px] drop-shadow-[0_12px_10px_rgba(41,75,59,0.1)]"
+                        viewBox="0 0 460 390" role="img" aria-label="ภาพประกอบถังความเครียดที่มีก๊อกน้ำ">
+                        <defs>
+                            <linearGradient id="bucketGrad" x1="0" x2="1" y1="0" y2="1">
+                                <stop stop-color="#65b9e7" />
+                                <stop offset="1" stop-color="#268acb" />
+                            </linearGradient>
+                            <clipPath id="bucketInside">
+                                <path d="M75 110 L355 110 L325 330 Q215 365 105 330Z" />
+                            </clipPath>
+                        </defs>
+                        <path d="M77 104 Q215 30 354 104 L354 127 Q216 196 77 127Z" fill="#268acb" />
+                        <path d="M77 112 Q215 42 354 112 Q215 181 77 112Z" fill="#6abbe8" />
+                        <g clip-path="url(#bucketInside)">
+                            <rect x="65" y="190" width="310" height="190" fill="#63c2d3" />
+                            <path d="M65 208 Q125 193 185 208 T305 208 T375 208" fill="none" stroke="#d5f3f5"
+                                stroke-width="6" />
+                        </g>
+                        <path d="M77 113 L105 330 Q215 365 325 330 L354 113" fill="none" stroke="#268acb"
+                            stroke-width="18" stroke-linejoin="round" />
+                        <path d="M82 150 Q215 218 350 150" fill="none" stroke="#4aa7db" stroke-width="22" />
+                        <!-- Faucet / Tap -->
+                        <path d="M345 240 h44 q14 0 14 14 v17 q0 12 13 12 h16 q22 0 22 20 v17" fill="none"
+                            stroke="#b8b9c3" stroke-width="24" stroke-linecap="round" />
+                        <path d="M394 230 v-22 m-22 0 h44" stroke="#b8b9c3" stroke-width="14" stroke-linecap="round" />
+                        <!-- Water Droplet -->
+                        <path d="M434 319 q-24 32 0 48 q24-16 0-48" fill="#66c4d1" />
+                        <path d="M77 112 Q215 42 354 112" fill="none" stroke="#268acb" stroke-width="10" />
+                        <path d="M145 83 q40-25 75-10" fill="none" stroke="#e9f8fa" stroke-width="9"
+                            stroke-linecap="round" />
+                        <!-- Sparkles -->
+                        <path d="M48 50 l-15-18 m20 17 7-25 m-2 29 20-8" stroke="#287c68" stroke-width="4"
+                            stroke-linecap="round" />
+                        <path d="M365 52 l10-25 10 25 m-10 2 v13" fill="none" stroke="#287c68" stroke-width="4"
+                            stroke-linecap="round" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- SECTION 01: ที่มาและความสำคัญ & วัตถุประสงค์ของโครงการสัมมนา -->
+        <section id="proposal" class="bg-cream py-16 md:py-20 print:bg-white print:py-8">
+            <div class="mx-auto w-[92%] max-w-6xl">
+                <div class="max-w-3xl">
+                    <div class="text-xs font-bold tracking-[2px] text-sage uppercase">01 / SEMINAR PROPOSAL · RATIONALE
+                        &amp; OBJECTIVES</div>
+                    <h2 class="mt-2 font-kanit text-3xl font-bold text-forest sm:text-4xl">ที่มาและความสำคัญ
+                        และวัตถุประสงค์โครงการ</h2>
+                    <p class="mt-2 text-muted">
+                        หลักการและเหตุผลในการจัดโครงการสัมมนา “Refresh &amp; Restart: The Stress Bucket”
+                        เพื่อสร้างความสมดุลทางใจและการทำงานร่วมกันอย่างยั่งยืน
+                    </p>
+                </div>
+
+                <!-- ที่มาและความสำคัญ (Rationale) -->
+                <div
+                    class="mt-8 rounded-3xl border border-sand bg-white p-6 shadow-soft sm:p-8 md:p-10 print:shadow-none">
+                    <div class="flex flex-wrap items-center gap-3">
+                        <span
+                            class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-mint text-lg">📖</span>
+                        <h3 class="font-kanit text-2xl font-semibold text-forest">1. ที่มาและความสำคัญของโครงการ</h3>
+                    </div>
+
+                    <div
+                        class="mt-5 grid grid-cols-1 gap-6 text-sm leading-relaxed text-[#3e453f] sm:text-base lg:grid-cols-12">
+                        <div class="space-y-4 lg:col-span-7">
+                            <p>
+                                ในสภาพแวดล้อมการเรียนและการทำงานปัจจุบัน ผู้คนต้องเผชิญกับความท้าทายหลากหลายด้าน
+                                ทั้งภาระงานที่เร่งด่วน ความคาดหวังจากตนเองและผู้อื่น รวมถึงการเปลี่ยนแปลงอย่างรวดเร็ว
+                                ส่งผลให้เกิด <strong>“ความเครียดสะสม”</strong> โดยไม่รู้ตัว
+                                หากเปรียบเทียบจิตใจของคนเราเป็นเสมือน <strong>“ถังน้ำ (The Stress Bucket)”</strong>
+                                ความเครียดและปัญหาต่าง ๆ ก็เปรียบได้กับน้ำที่ไหลเติมลงในถังอยู่ตลอดเวลา
+                            </p>
+                            <p>
+                                เมื่อปริมาณน้ำความเครียดเพิ่มสูงขึ้นอย่างต่อเนื่องโดยไม่มีช่องทางระบายออกที่เหมาะสม
+                                ย่อมนำไปสู่ภาวะน้ำล้นถัง เกิดความเหนื่อยล้าทางอารมณ์ ขาดแรงจูงใจ หรือภาวะหมดไฟ (Burnout)
+                                ซึ่งไม่เพียงส่งผลกระทบต่อสุขภาพกายและใจของรายบุคคลเท่านั้น
+                                แต่ยังกระทบต่อบรรยากาศและประสิทธิภาพในการทำงานร่วมกันเป็นทีมอีกด้วย
+                            </p>
+                            <p>
+                                ด้วยเหตุนี้ คณะผู้จัดทำจึงได้ริเริ่ม <strong>โครงการสัมมนาเชิงปฏิบัติการ “Refresh &amp;
+                                    Restart: The Stress Bucket”</strong> ขึ้น
+                                เพื่อเปิดพื้นที่ให้ผู้เข้าร่วมได้สำรวจระดับความเครียดของตนเอง ค้นพบ
+                                “ก๊อกระบายความเครียด” หรือวิธีฟื้นฟูพลังใจที่ทำได้จริง
+                                พร้อมทั้งร่วมกันสร้างข้อตกลงและขอบเขตการทำงานร่วมกันในทีมผ่านแนวคิด <em>Start / Stop /
+                                    Continue</em>
+                            </p>
+                        </div>
+
+                        <!-- Highlight Box ด้านขวา -->
+                        <div
+                            class="flex flex-col justify-between gap-4 rounded-2xl border border-mint bg-[#f4fbf8] p-6 lg:col-span-5">
+                            <div>
+                                <div class="text-xs font-bold tracking-wider text-sage uppercase">CORE INSIGHT ·
+                                    แนวคิดหลัก</div>
+                                <h4 class="mt-1 font-kanit text-lg font-semibold text-forest">
+                                    “ทุกคนมีขนาดถังไม่เท่ากัน แต่ทุกคนสร้างก๊อกระบายของตัวเองได้”
+                                </h4>
+                                <p class="mt-2 text-sm text-muted">
+                                    การเข้าใจขีดจำกัดของตนเองและเคารพพื้นที่พักใจของเพื่อนร่วมทีม
+                                    คือกุญแจสำคัญที่ช่วยป้องกันไม่ให้ถังของใครต้องล้น
+                                </p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3 border-t border-sage/20 pt-4 text-xs">
+                                <div class="rounded-xl bg-white p-3 shadow-sm">
+                                    <span class="font-bold text-coraldark">ปัญหาที่พบ</span>
+                                    <p class="mt-1 text-muted">เครียดสะสม แบกรับงานหนัก ขาดพื้นที่พักใจ</p>
+                                </div>
+                                <div class="rounded-xl bg-white p-3 shadow-sm">
+                                    <span class="font-bold text-forest">แนวทางแก้ไข</span>
+                                    <p class="mt-1 text-muted">รู้ทันความเครียด เติมวิธีฮีลใจ สร้างกติกาทีม</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- วัตถุประสงค์ของโครงการ (Objectives) -->
+                <div class="mt-8">
+                    <div class="mb-5 flex items-center gap-3">
+                        <span
+                            class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-forest text-lg text-white">🎯</span>
+                        <h3 class="font-kanit text-2xl font-semibold text-forest">2. วัตถุประสงค์ของโครงการ</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                        <div
+                            class="rounded-2xl border border-sand bg-white p-6 shadow-card transition hover:-translate-y-1">
+                            <div class="flex items-center justify-between">
+                                <span class="font-playfair text-3xl font-bold text-sage">01</span>
+                                <span
+                                    class="rounded-full bg-coral/15 px-3 py-1 text-xs font-semibold text-coraldark">รู้ทันใจ</span>
+                            </div>
+                            <h4 class="mt-3 font-kanit text-lg font-semibold text-forest">สำรวจและตระหนักรู้ความเครียด
+                            </h4>
+                            <p class="mt-2 text-sm text-muted">
+                                เพื่อให้ผู้เข้าร่วมสามารถระบุปัจจัยกดดัน ภาระงาน
+                                และสิ่งที่กำลังเติมความเครียดลงในถังของตนเองได้อย่างชัดเจน
+                            </p>
+                        </div>
+
+                        <div
+                            class="rounded-2xl border border-sand bg-white p-6 shadow-card transition hover:-translate-y-1">
+                            <div class="flex items-center justify-between">
+                                <span class="font-playfair text-3xl font-bold text-sage">02</span>
+                                <span
+                                    class="rounded-full bg-mint px-3 py-1 text-xs font-semibold text-forest">ฮีลใจเป็น</span>
+                            </div>
+                            <h4 class="mt-3 font-kanit text-lg font-semibold text-forest">ค้นหาวิธีระบายความเครียด</h4>
+                            <p class="mt-2 text-sm text-muted">
+                                เพื่อให้ผู้เข้าร่วมค้นพบกิจกรรมและแนวทางการดูแลฟื้นฟูพลังใจ (“ก๊อกระบาย”)
+                                ที่เหมาะสมและนำไปปฏิบัติได้จริง
+                            </p>
+                        </div>
+
+                        <div
+                            class="rounded-2xl border border-sand bg-white p-6 shadow-card transition hover:-translate-y-1">
+                            <div class="flex items-center justify-between">
+                                <span class="font-playfair text-3xl font-bold text-sage">03</span>
+                                <span
+                                    class="rounded-full bg-skywater/15 px-3 py-1 text-xs font-semibold text-skywater">แบ่งปัน</span>
+                            </div>
+                            <h4 class="mt-3 font-kanit text-lg font-semibold text-forest">แลกเปลี่ยนพลังบวกในกลุ่ม</h4>
+                            <p class="mt-2 text-sm text-muted">
+                                เพื่อสร้างพื้นที่ปลอดภัยให้สมาชิกได้แบ่งปันแนวทางการดูแลตัวเอง
+                                เกิดความเข้าใจและกำลังใจซึ่งกันและกัน
+                            </p>
+                        </div>
+
+                        <div
+                            class="rounded-2xl border border-sand bg-white p-6 shadow-card transition hover:-translate-y-1">
+                            <div class="flex items-center justify-between">
+                                <span class="font-playfair text-3xl font-bold text-sage">04</span>
+                                <span
+                                    class="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-800">กติกาทีม</span>
+                            </div>
+                            <h4 class="mt-3 font-kanit text-lg font-semibold text-forest">สร้างขอบเขตการทำงานร่วมกัน
+                            </h4>
+                            <p class="mt-2 text-sm text-muted">
+                                เพื่อร่วมกันออกแบบกติกาการทำงานด้วย <em>Start / Stop / Continue</em>
+                                ช่วยป้องกันไม่ให้ถังของเพื่อนในทีมล้น
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 02: กลุ่มเป้าหมาย (Target Group) -->
+        <section id="target" class="bg-white py-16 md:py-20 print:py-8">
+            <div class="mx-auto w-[92%] max-w-6xl">
+                <div class="max-w-3xl">
+                    <div class="text-xs font-bold tracking-[2px] text-sage uppercase">02 / TARGET AUDIENCE &amp; FORMAT
+                    </div>
+                    <h2 class="mt-2 font-kanit text-3xl font-bold text-forest sm:text-4xl">
+                        กลุ่มเป้าหมายและรูปแบบการจัดกิจกรรม</h2>
+                    <p class="mt-2 text-muted">
+                        ออกแบบโครงสร้างกลุ่มขนาดเล็กเพื่อให้ผู้เข้าร่วมทุกคนมีส่วนร่วมอย่างทั่วถึงและรู้สึกปลอดภัยในการแบ่งปัน
+                    </p>
+                </div>
+
+                <div class="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-12">
+                    <!-- Left Card: รายละเอียดกลุ่มเป้าหมาย -->
+                    <div class="rounded-3xl border border-sand bg-paper p-6 shadow-card sm:p-8 lg:col-span-7">
+                        <div class="flex items-center gap-3">
+                            <span
+                                class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-mint text-xl">👥</span>
+                            <div>
+                                <h3 class="font-kanit text-xl font-semibold text-forest">คุณสมบัติและจำนวนกลุ่มเป้าหมาย
+                                </h3>
+                                <p class="text-xs text-muted">Small-Group Interactive Seminar</p>
+                            </div>
+                        </div>
+
+                        <ul class="mt-6 space-y-4 text-sm sm:text-base">
+                            <li class="flex items-start gap-3 rounded-2xl border border-sand bg-white p-4">
+                                <span
+                                    class="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-forest text-xs font-bold text-white">1</span>
+                                <div>
+                                    <strong class="font-kanit text-forest">กลุ่มเป้าหมายหลัก:</strong>
+                                    <p class="mt-0.5 text-muted">
+                                        นิสิต นักศึกษา บุคลากร หรือสมาชิกทีมทำงานที่กำลังเผชิญกับความกดดันจากการเรียน
+                                        การทำงาน หรือต้องการเรียนรู้วิธีจัดการความเครียดและสื่อสารขอบเขตการทำงานกับทีม
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3 rounded-2xl border border-sand bg-white p-4">
+                                <span
+                                    class="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-forest text-xs font-bold text-white">2</span>
+                                <div>
+                                    <strong class="font-kanit text-forest">จำนวนผู้เข้าร่วมโครงการ:</strong>
+                                    <p class="mt-0.5 text-muted">
+                                        จำนวนทั้งสิ้น <strong>10 คน</strong> โดยแบ่งออกเป็น <strong>2 กลุ่มย่อย กลุ่มละ
+                                            5 คน</strong> เพื่อให้เกิดความใกล้ชิด
+                                        เปิดโอกาสให้ทุกคนได้พูดคุยและแลกเปลี่ยนความคิดเห็นอย่างทั่วถึง
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3 rounded-2xl border border-sand bg-white p-4">
+                                <span
+                                    class="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-forest text-xs font-bold text-white">3</span>
+                                <div>
+                                    <strong class="font-kanit text-forest">รูปแบบการเรียนรู้:</strong>
+                                    <p class="mt-0.5 text-muted">
+                                        กิจกรรมเชิงปฏิบัติการ (Active Learning Workshop) ผสมผสานการสะท้อนคิดส่วนบุคคล
+                                        (Self-Reflection) และการระดมสมองกลุ่มย่อย (Group Brainstorming)
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Right Card: Visual Group Structure & Expected Outcomes -->
+                    <div
+                        class="flex flex-col justify-between gap-6 rounded-3xl border border-sand bg-cream/60 p-6 sm:p-8 lg:col-span-5">
+                        <div>
+                            <div class="text-xs font-bold tracking-wider text-sage uppercase">GROUP STRUCTURE</div>
+                            <h3 class="mt-1 font-kanit text-xl font-semibold text-forest">โครงสร้างการแบ่งกลุ่ม (10 คน)
+                            </h3>
+                            <p class="mt-1 text-sm text-muted">แบ่งกลุ่มสมดุลเพื่อให้การแชร์ “Post-it สีเขียว”
+                                เป็นกันเอง</p>
+
+                            <div class="mt-5 grid grid-cols-2 gap-3">
+                                <div class="rounded-2xl border border-sand bg-white p-4 text-center shadow-sm">
+                                    <div class="text-xs font-bold text-sage">GROUP 01</div>
+                                    <div class="mt-1 font-kanit text-lg font-bold text-forest">กลุ่มที่ 1</div>
+                                    <div class="mt-2 flex justify-center gap-1 text-lg" aria-label="สมาชิก 5 คน">
+                                        <span>🧑</span><span>👩</span><span>🧑</span><span>👩</span><span>🧑</span>
+                                    </div>
+                                    <div
+                                        class="mt-2 inline-block rounded-full bg-mint px-3 py-0.5 text-xs font-semibold text-forest">
+                                        จำนวน 5 คน
+                                    </div>
+                                </div>
+
+                                <div class="rounded-2xl border border-sand bg-white p-4 text-center shadow-sm">
+                                    <div class="text-xs font-bold text-sage">GROUP 02</div>
+                                    <div class="mt-1 font-kanit text-lg font-bold text-forest">กลุ่มที่ 2</div>
+                                    <div class="mt-2 flex justify-center gap-1 text-lg" aria-label="สมาชิก 5 คน">
+                                        <span>👩</span><span>🧑</span><span>👩</span><span>🧑</span><span>👩</span>
+                                    </div>
+                                    <div
+                                        class="mt-2 inline-block rounded-full bg-mint px-3 py-0.5 text-xs font-semibold text-forest">
+                                        จำนวน 5 คน
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="rounded-2xl bg-forest p-5 text-white">
+                            <div class="text-xs font-bold tracking-wider text-mint uppercase">EXPECTED OUTCOMES</div>
+                            <h4 class="mt-1 font-kanit text-base font-semibold">ผลลัพธ์ที่ผู้เข้าร่วมจะได้รับ</h4>
+                            <ul class="mt-2.5 space-y-1.5 text-xs text-white/90 sm:text-sm">
+                                <li>✓ แผนภาพถังความเครียดและก๊อกฮีลใจส่วนบุคคล (A4 Canvas)</li>
+                                <li>✓ คลังไอเดียดูแลสุขภาพใจที่แลกเปลี่ยนจากเพื่อนในกลุ่ม</li>
+                                <li>✓ ตารางข้อตกลงการทำงานร่วมกัน (Start / Stop / Continue)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 03: แผนการดำเนินกิจกรรม (Activity Action Plan & Schedule) -->
+        <section id="schedule" class="bg-cream py-16 md:py-20 print:bg-white print:py-8">
+            <div class="mx-auto w-[92%] max-w-6xl">
+                <div class="max-w-3xl">
+                    <div class="text-xs font-bold tracking-[2px] text-sage uppercase">03 / ACTION PLAN &amp; AGENDA
+                    </div>
+                    <h2 class="mt-2 font-kanit text-3xl font-bold text-forest sm:text-4xl">แผนการดำเนินกิจกรรมสัมมนา
+                    </h2>
+                    <p class="mt-2 text-muted">
+                        ลำดับขั้นตอนการดำเนินโครงการตั้งแต่การเตรียมความพร้อม การจัดกิจกรรมสัมมนา (รวม 150 นาที)
+                        จนถึงการสรุปผล
+                    </p>
+                </div>
+
+                <!-- 3 ระยะการดำเนินงานโครงการ -->
+                <div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+                    <div class="rounded-2xl border border-sand bg-white p-5 shadow-card">
+                        <span class="inline-block rounded-lg bg-mint px-3 py-1 text-xs font-bold text-forest">ระยะที่ 1
+                            · Pre-Event</span>
+                        <h3 class="mt-2.5 font-kanit text-lg font-semibold text-forest">ขั้นเตรียมการและประชาสัมพันธ์
+                        </h3>
+                        <p class="mt-1.5 text-sm text-muted">
+                            สำรวจความต้องการผู้เข้าร่วม จัดเตรียมสถานที่ อุปกรณ์ Workshop (กระดาษ A4, ปากกา, Post-it
+                            สีแดง-เขียว) และซักซ้อมกระบวนกร
+                        </p>
+                    </div>
+                    <div class="rounded-2xl border-2 border-forest bg-white p-5 shadow-card">
+                        <span class="inline-block rounded-lg bg-forest px-3 py-1 text-xs font-bold text-white">ระยะที่ 2
+                            · Event Day</span>
+                        <h3 class="mt-2.5 font-kanit text-lg font-semibold text-forest">ขั้นดำเนินกิจกรรมสัมมนา (2.5
+                            ชม.)</h3>
+                        <p class="mt-1.5 text-sm text-muted">
+                            จัดกิจกรรมตามกำหนดการ 6 ช่วง ทั้งการบรรยายโมเดลถังความเครียด กิจกรรมวาดภาพสะท้อนคิด
+                            และระดมสมองสร้างกติกาทีม
+                        </p>
+                    </div>
+                    <div class="rounded-2xl border border-sand bg-white p-5 shadow-card">
+                        <span class="inline-block rounded-lg bg-mint px-3 py-1 text-xs font-bold text-forest">ระยะที่ 3
+                            · Post-Event</span>
+                        <h3 class="mt-2.5 font-kanit text-lg font-semibold text-forest">ขั้นสรุปและประเมินผลโครงการ</h3>
+                        <p class="mt-1.5 text-sm text-muted">
+                            รวบรวมแบบประเมินความพึงพอใจ สรุปข้อตกลง Start / Stop / Continue ของทั้ง 2 กลุ่ม
+                            และจัดทำรายงานสรุปผลโครงการ
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ตารางกำหนดการสัมมนา (Detailed Agenda Table) -->
+                <div class="mt-8 overflow-hidden rounded-3xl border border-sand bg-white shadow-soft print:shadow-none">
+                    <div
+                        class="flex flex-wrap items-center justify-between gap-2 border-b border-sand bg-forest px-6 py-4 text-white">
+                        <div>
+                            <h3 class="font-kanit text-lg font-semibold">กำหนดการดำเนินกิจกรรม (Workshop Schedule)</h3>
+                            <p class="text-xs text-mint">ระยะเวลารวม 2 ชั่วโมง 30 นาที (150 นาที) ·
+                                รูปแบบบรรยายสลับปฏิบัติการกลุ่ม</p>
+                        </div>
+                        <span class="rounded-full bg-white/15 px-3.5 py-1 text-xs font-semibold">รวม 6
+                            ช่วงกิจกรรม</span>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full min-w-[680px] border-collapse text-left text-sm">
+                            <thead>
+                                <tr class="border-b border-sand bg-[#f8f5eb] font-kanit text-forest">
+                                    <th class="px-5 py-3.5 font-semibold">ช่วงเวลา / ระยะเวลา</th>
+                                    <th class="px-5 py-3.5 font-semibold">หัวข้อกิจกรรม</th>
+                                    <th class="px-5 py-3.5 font-semibold">รายละเอียดการดำเนินกิจกรรม</th>
+                                    <th class="px-5 py-3.5 font-semibold">หมายเหตุ</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-sand">
+                                <tr class="transition hover:bg-paper">
+                                    <td class="whitespace-nowrap px-5 py-4 align-top font-semibold text-forest">
+                                        14:15 - 14:30 น.<br>
+                                        <span class="text-xs font-normal text-muted">(15 นาที)</span>
+                                    </td>
+                                    <td class="px-5 py-4 align-top font-kanit font-semibold text-ink">
+                                        1. พิธีลงทะเบียน (Registration)
+                                    </td>
+                                    <td class="px-5 py-4 align-top text-muted">
+                                        • ผู้เข้าร่วมสัมมนาลงทะเบียน รับเอกสารประกอบสัมมนา และแบบฟอร์ม Workshop
+                                    </td>
+                                    <td class="px-5 py-4 align-top text-xs text-muted">
+                                        ฝ่ายลงทะเบียน / ผู้จัดงาน
+                                    </td>
+                                </tr>
+
+                                <tr class="transition hover:bg-paper">
+                                    <td class="whitespace-nowrap px-5 py-4 align-top font-semibold text-forest">
+                                        14:30 - 14:40 น.<br>
+                                        <span class="text-xs font-normal text-muted">(10 นาที)</span>
+                                    </td>
+                                    <td class="px-5 py-4 align-top font-kanit font-semibold text-ink">
+                                        2. พิธีเปิดการสัมมนา (Opening Ceremony)
+                                    </td>
+                                    <td class="px-5 py-4 align-top text-muted">
+                                        • พิธีกรกล่าวต้อนรับและนำเข้าสู่งานสัมมนา<br>
+                                        • ประธานจัดงานกล่าวรายงานวัตถุประสงค์การจัดงาน<br>
+                                        • ประธานในพิธี กล่าวเปิดการสัมมนาอย่างเป็นทางการ
+                                    </td>
+                                    <td class="px-5 py-4 align-top text-xs text-muted">
+                                        พิธีกรดำเนินรายการ<br>
+                                        ประธานจัดงาน<br>
+                                        ประธานในพิธี
+                                    </td>
+                                </tr>
+
+                                <tr class="transition hover:bg-paper">
+                                    <td class="whitespace-nowrap px-5 py-4 align-top font-semibold text-forest">
+                                        14:40 - 15:00 น.<br>
+                                        <span class="text-xs font-normal text-muted">(20 นาที)</span>
+                                    </td>
+                                    <td class="px-5 py-4 align-top font-kanit font-semibold text-ink">
+                                        3. การบรรยายวิชาการ (Keynote Presentation)
+                                    </td>
+                                    <td class="px-5 py-4 align-top text-muted">
+                                        • การนำเสนอสรุปสาระสำคัญ: เข้าใจ Burnout
+                                        และกรอบแนวคิดการบริหารความเครียดสำหรับคนทำงานและเรียน
+                                    </td>
+                                    <td class="px-5 py-4 align-top text-xs text-muted">
+                                        วิทยากร / นำเสนอหน้าชั้นเรียน
+                                    </td>
+                                </tr>
+
+                                <tr class="bg-[#faf8f0]">
+                                    <td class="whitespace-nowrap px-5 py-3.5 align-top font-semibold text-sage">
+                                        15:00 - 15:45 น.<br>
+                                        <span class="text-xs font-normal text-muted">(45 นาที)</span>
+                                    </td>
+                                    <td class="px-5 py-4 align-top font-kanit font-semibold text-ink">
+                                        4. กิจกรรมปฏิบัติการเชิงบูรณาการ (Main Workshop)<br>
+                                        <span class="text-xs font-normal text-muted">(แบ่ง 2 กลุ่มย่อย กลุ่มละ 5
+                                            คน)</span>
+                                    </td>
+                                    <td class="px-5 py-3.5 align-top text-muted">
+                                        • ส่วนที่ 1 (15 นาที): สำรวจปัจจัยความเครียดและทรัพยากรส่วนบุคคล (Stress Bucket)
+                                        ลงในแบบฟอร์ม<br>
+                                        • ส่วนที่ 2 (25 นาที): ระดมความคิดในกลุ่มเพื่อหาแนวทางแก้ไขระดับกลุ่ม/องค์กร
+                                        และจัดทำข้อเสนอแนะ (Peer &amp; Team Boundaries) ลงในกระดาษฟลิปชาร์ท
+                                    </td>
+                                    <td class="px-5 py-3.5 align-top text-xs text-muted">
+                                        ผู้เข้าร่วมสัมมนาแบ่ง 2 กลุ่มย่อย (กลุ่มละ 5 คน)
+                                    </td>
+                                </tr>
+
+                                <tr class="transition hover:bg-paper">
+                                    <td class="whitespace-nowrap px-5 py-4 align-top font-semibold text-forest">
+                                        15:45 - 15:55 น.<br>
+                                        <span class="text-xs font-normal text-muted">(10 นาที)</span>
+                                    </td>
+                                    <td class="px-5 py-4 align-top font-kanit font-semibold text-ink">
+                                        5. พักรับประทานอาหารว่าง (Coffee Break)
+                                    </td>
+                                    <td class="px-5 py-4 align-top text-muted">
+                                        พักรับประทานอาหารว่าง (Coffee Break)
+                                    </td>
+                                    <td class="px-5 py-4 align-top text-xs text-muted">
+                                        ผู้เข้าร่วมสัมมนา
+                                    </td>
+                                </tr>
+
+                                <tr class="transition hover:bg-paper">
+                                    <td class="whitespace-nowrap px-5 py-4 align-top font-semibold text-forest">
+                                        15:55 - 16:15 น.<br>
+                                        <span class="text-xs font-normal text-muted">(20 นาที)</span>
+                                    </td>
+                                    <td class="px-5 py-4 align-top font-kanit font-semibold text-ink">
+                                        6. การนำเสนอผลการสัมมนากลุ่มย่อยหน้าชั้นเรียน (Group Presentations &amp;
+                                        Q&amp;A)
+                                    </td>
+                                    <td class="px-5 py-4 align-top text-muted">
+                                        • กลุ่มที่ 1 นำเสนอ (10 นาที): นำเสนอผลการวิเคราะห์และข้อเสนอแนะ<br>
+                                        • กลุ่มที่ 2 นำเสนอ (10 นาที): นำเสนอผลการวิเคราะห์และข้อเสนอแนะ
+                                        (เกิดการแลกเปลี่ยนเรียนรู้และอภิปรายร่วมกันระหว่างกลุ่ม)
+                                    </td>
+                                    <td class="px-5 py-4 align-top text-xs text-muted">
+                                        ตัวแทนกลุ่มที่ 1 และกลุ่มที่ 2<br>
+                                        ผู้เข้าร่วมทุกคนร่วมอภิปราย
+                                    </td>
+                                </tr>
+
+                                <tr class="transition hover:bg-paper">
+                                    <td class="whitespace-nowrap px-5 py-4 align-top font-semibold text-forest">
+                                        16:15 - 16:25 น.<br>
+                                        <span class="text-xs font-normal text-muted">(10 นาที)</span>
+                                    </td>
+                                    <td class="px-5 py-4 align-top font-kanit font-semibold text-ink">
+                                        7. การอภิปรายสรุปภาพรวม (Synthesis &amp; Wrap-up)
+                                    </td>
+                                    <td class="px-5 py-4 align-top text-muted">
+                                        • วิทยากร/ผู้ดำเนินรายการประมวลสรุปประเด็นจากการนำเสนอของทั้ง 2 กลุ่ม
+                                        เชื่อมโยงสู่การนำไปประยุกต์ใช้
+                                    </td>
+                                    <td class="px-5 py-4 align-top text-xs text-muted">
+                                        วิทยากร / ผู้ดำเนินรายการ
+                                    </td>
+                                </tr>
+
+                                <tr class="transition hover:bg-paper">
+                                    <td class="whitespace-nowrap px-5 py-4 align-top font-semibold text-forest">
+                                        16:25 - 16:30 น.<br>
+                                        <span class="text-xs font-normal text-muted">(5 นาที)</span>
+                                    </td>
+                                    <td class="px-5 py-4 align-top font-kanit font-semibold text-ink">
+                                        8. พิธีปิดการสัมมนา (Closing Ceremony)
+                                    </td>
+                                    <td class="px-5 py-4 align-top text-muted">
+                                        • ประธานในพิธี กล่าวปิดการสัมมนาอย่างเป็นทางการ<br>
+                                        • ถ่ายภาพหมู่ร่วมกันเป็นระลึก
+                                    </td>
+                                    <td class="px-5 py-4 align-top text-xs text-muted">
+                                        ประธานในพิธี<br>
+                                        ผู้เข้าร่วมสัมมนาทุกคน
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 04: โมเดลถังความเครียด & เครื่องมือจำลอง (The Model + Interactive Simulator) -->
+        <section id="concept" class="bg-paper py-16 md:py-20 print:py-8">
+            <div class="mx-auto w-[92%] max-w-6xl">
+                <div class="max-w-3xl">
+                    <div class="text-xs font-bold tracking-[2px] text-sage uppercase">04 / UNDERSTAND THE MODEL</div>
+                    <h2 class="mt-2 font-kanit text-3xl font-bold text-forest sm:text-4xl">ถังความเครียดคืออะไร?</h2>
+                    <p class="mt-2 text-muted">
+                        ลองจินตนาการว่าทุกคนมีถังน้ำเป็นของตัวเอง แต่ละคนมีขนาดถังและขีดจำกัดในการรับมือไม่เท่ากัน
+                    </p>
+                </div>
+
+                <!-- 4 Elements of the Stress Bucket -->
+                <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                    <div class="rounded-2xl border border-sand bg-white p-6 text-center shadow-card">
+                        <div class="font-playfair text-4xl font-bold text-sage">01</div>
+                        <h3 class="mt-2 font-kanit text-lg font-semibold text-forest">ขนาดถัง</h3>
+                        <p class="mt-1.5 text-sm text-muted">ขีดจำกัดความอดทนของแต่ละคนไม่เท่ากัน
+                            ไม่ควรนำถังของเราไปตัดสินถังของคนอื่น</p>
+                    </div>
+                    <div class="rounded-2xl border border-sand bg-white p-6 text-center shadow-card">
+                        <div class="font-playfair text-4xl font-bold text-coral">02</div>
+                        <h3 class="mt-2 font-kanit text-lg font-semibold text-forest">น้ำไหลเข้า</h3>
+                        <p class="mt-1.5 text-sm text-muted">ความเครียดจากงาน การเรียน ความคาดหวัง
+                            และเรื่องที่สะสมในแต่ละวัน</p>
+                    </div>
+                    <div class="rounded-2xl border border-sand bg-white p-6 text-center shadow-card">
+                        <div class="font-playfair text-4xl font-bold text-skywater">03</div>
+                        <h3 class="mt-2 font-kanit text-lg font-semibold text-forest">ก๊อกระบาย</h3>
+                        <p class="mt-1.5 text-sm text-muted">
+                            วิธีฮีลใจหรือกิจกรรมพักผ่อนที่ช่วยคลายความเครียดและลดระดับน้ำในถัง</p>
+                    </div>
+                    <div class="rounded-2xl border border-sand bg-white p-6 text-center shadow-card">
+                        <div class="font-playfair text-4xl font-bold text-amber-500">04</div>
+                        <h3 class="mt-2 font-kanit text-lg font-semibold text-forest">น้ำล้นถัง</h3>
+                        <p class="mt-1.5 text-sm text-muted">ภาวะเครียดสะสมมากเกินกำลัง อาจนำไปสู่อาการอ่อนล้าและภาวะ
+                            Burnout</p>
+                    </div>
+                </div>
+
+                <!-- Interactive Stress Bucket Simulator -->
+                <div class="mt-8 rounded-3xl border border-sand bg-white p-6 shadow-soft sm:p-8 print:hidden">
+                    <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-12">
+                        <div class="lg:col-span-5">
+                            <div class="rounded-2xl border border-sand bg-paper p-4">
+                                <svg id="simSvg" class="mx-auto h-auto max-h-[240px] w-full" viewBox="0 0 360 270"
+                                    role="img" aria-label="แบบจำลองระดับน้ำในถังความเครียด">
+                                    <defs>
+                                        <clipPath id="simClip">
+                                            <path d="M65 65 L255 65 L232 225 Q160 250 88 225 Z" />
+                                        </clipPath>
+                                    </defs>
+                                    <!-- Bucket Back Rim -->
+                                    <ellipse cx="160" cy="65" rx="95" ry="20" fill="#268acb" />
+                                    <ellipse cx="160" cy="65" rx="87" ry="15" fill="#89cdf1" />
+                                    <!-- Water Inside -->
+                                    <g clip-path="url(#simClip)">
+                                        <rect id="simWaterRect" x="55" y="145" width="210" height="110" fill="#63c2d3"
+                                            class="transition-all duration-500 ease-out" />
+                                        <path id="simWave" d="M55 145 Q107 136 160 145 T265 145" fill="none"
+                                            stroke="#dff8fa" stroke-width="5"
+                                            class="transition-all duration-500 ease-out" />
+                                    </g>
+                                    <!-- Bucket Outer Body Outline -->
+                                    <path d="M65 65 L88 225 Q160 250 232 225 L255 65" fill="none" stroke="#268acb"
+                                        stroke-width="11" stroke-linejoin="round" />
+                                    <!-- Faucet -->
+                                    <path d="M248 165 h32 q10 0 10 10 v12 q0 9 10 9 h12 q15 0 15 15 v12" fill="none"
+                                        stroke="#b8b9c3" stroke-width="16" stroke-linecap="round" />
+                                    <path d="M284 157 v-16 m-16 0 h32" stroke="#b8b9c3" stroke-width="10"
+                                        stroke-linecap="round" />
+                                    <!-- Animated Drain Drop -->
+                                    <path id="simDroplet" d="M327 228 q-13 18 0 28 q13-10 0-28" fill="#66c4d1"
+                                        class="opacity-0 transition-opacity duration-300" />
+                                    <!-- Percentage Text -->
+                                    <text id="simPercentText" x="160" y="185" text-anchor="middle" fill="#174966"
+                                        font-family="Kanit, sans-serif" font-size="22" font-weight="700">
+                                        45%
+                                    </text>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-7">
+                            <span class="inline-block rounded-full bg-mint px-3 py-1 text-xs font-bold text-forest">
+                                INTERACTIVE DEMO · ทดลองจำลองถังความเครียด
+                            </span>
+                            <h3 class="mt-2 font-kanit text-2xl font-semibold text-forest">ลองเติมน้ำความเครียด
+                                และเปิดก๊อกฮีลใจ</h3>
+                            <p class="mt-1.5 text-sm text-muted">
+                                กดปุ่มด้านล่างเพื่อจำลองเหตุการณ์ในชีวิตประจำวัน และสังเกตระดับน้ำในถังของคุณ
+                            </p>
+
+                            <!-- Controls -->
+                            <div class="mt-5 flex flex-wrap gap-2.5">
+                                <button type="button" onclick="adjustBucket(18, 'งานเร่งด่วน')"
+                                    class="rounded-full bg-coral px-4 py-2.5 text-xs font-semibold text-white shadow-sm transition hover:bg-coraldark active:scale-95 sm:text-sm">
+                                    + เติมเรื่องเครียด (Post-it แดง)
+                                </button>
+                                <button type="button" onclick="adjustBucket(-20, 'พักผ่อนและฟังเพลง')"
+                                    class="rounded-full bg-forest px-4 py-2.5 text-xs font-semibold text-white shadow-sm transition hover:bg-sage active:scale-95 sm:text-sm">
+                                    − เปิดก๊อกฮีลใจ (Post-it เขียว)
+                                </button>
+                                <button type="button" onclick="resetBucket()"
+                                    class="rounded-full border border-sand bg-white px-4 py-2.5 text-xs font-semibold text-forest transition hover:bg-cream sm:text-sm">
+                                    รีเซ็ตถัง
+                                </button>
+                            </div>
+
+                            <!-- Live Status Box -->
+                            <div id="bucketStatusBox" class="mt-5 rounded-2xl border border-sand bg-paper p-4">
+                                <div class="flex items-center justify-between text-xs font-semibold text-forest">
+                                    <span>สถานะถังความเครียดปัจจุบัน:</span>
+                                    <span id="bucketBadge"
+                                        class="rounded-full bg-mint px-2.5 py-0.5 text-forest">สมดุลกำลังดี (45%)</span>
+                                </div>
+                                <p id="bucketStatus" class="mt-1.5 text-sm text-muted">
+                                    ระดับน้ำอยู่ในเกณฑ์สมดุล มีพื้นที่รับมือกับเรื่องต่าง ๆ ได้ดี
+                                    แต่อย่าลืมเปิดก๊อกพักผ่อนอย่างสม่ำเสมอ
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 05: อุปกรณ์ & ขั้นตอน Workshop ทีละขั้น -->
+        <section id="steps" class="bg-cream py-16 md:py-20 print:bg-white print:py-8">
+            <div class="mx-auto w-[92%] max-w-6xl">
+                <!-- Materials Sub-section -->
+                <div class="max-w-3xl">
+                    <div class="text-xs font-bold tracking-[2px] text-sage uppercase">05 / PREPARE YOUR KIT &amp;
+                        WORKSHOP STEPS</div>
+                    <h2 class="mt-2 font-kanit text-3xl font-bold text-forest sm:text-4xl">อุปกรณ์และขั้นตอนทำ Workshop
+                        ทีละขั้น</h2>
+                    <p class="mt-2 text-muted">
+                        ใช้อุปกรณ์เรียบง่ายเพียง 4 อย่าง เพื่อพาผู้เข้าร่วมสำรวจสิ่งที่กดดันและออกแบบวิธีดูแลใจร่วมกัน
+                    </p>
+                </div>
+
+                <!-- 4 Materials Grid -->
+                <div class="mt-8 grid grid-cols-2 gap-3.5 lg:grid-cols-4">
+                    <div class="rounded-2xl border border-sand bg-white p-5 shadow-card">
+                        <div class="text-3xl">📄</div>
+                        <strong class="mt-2 block font-kanit text-base text-forest">1. กระดาษ A4 จำนวน 1 แผ่น</strong>
+                        <small
+                            class="mt-1 block text-xs text-muted sm:text-sm">ใช้เป็นพื้นที่วาดถังน้ำและก๊อกระบายของตนเอง</small>
+                    </div>
+                    <div class="rounded-2xl border border-sand bg-white p-5 shadow-card">
+                        <div class="text-3xl">✏️</div>
+                        <strong class="mt-2 block font-kanit text-base text-forest">2. ปากกาหรือสีไม้</strong>
+                        <small class="mt-1 block text-xs text-muted sm:text-sm">ใช้วาดถังน้ำ ก๊อกน้ำ
+                            และเขียนข้อความสะท้อนคิด</small>
+                    </div>
+                    <div class="rounded-2xl border border-sand bg-white p-5 shadow-card">
+                        <div class="text-3xl">🟥</div>
+                        <strong class="mt-2 block font-kanit text-base text-forest">3. Post-it สีแดง</strong>
+                        <small
+                            class="mt-1 block text-xs text-muted sm:text-sm">ใช้เขียนสิ่งที่ทำให้เครียดหรือเรื่องที่กำลังแบกรับ</small>
+                    </div>
+                    <div class="rounded-2xl border border-sand bg-white p-5 shadow-card">
+                        <div class="text-3xl">🟩</div>
+                        <strong class="mt-2 block font-kanit text-base text-forest">4. Post-it สีเขียว</strong>
+                        <small
+                            class="mt-1 block text-xs text-muted sm:text-sm">ใช้เขียนสิ่งที่ชอบและกิจกรรมที่ทำแล้วมีความสุข</small>
+                    </div>
+                </div>
+
+                <!-- 3 Workshop Steps -->
+                <div class="mt-10 space-y-6">
+                    <!-- STEP 1 -->
+                    <article
+                        class="grid grid-cols-1 items-center gap-7 rounded-3xl border border-sand bg-white p-6 shadow-soft sm:p-8 lg:grid-cols-12 print:shadow-none">
+                        <div class="lg:col-span-7">
+                            <div class="inline-flex items-center gap-2.5 font-kanit text-sm font-bold text-forest">
+                                <span class="grid h-8 w-8 place-items-center rounded-full bg-coral text-white">1</span>
+                                <span>STEP 1 · UNLOAD</span>
+                            </div>
+                            <h3 class="mt-2 font-kanit text-2xl font-bold text-forest">เติมถังด้วยสิ่งที่กำลังแบกรับ
+                            </h3>
+                            <p class="mt-2 text-sm text-muted sm:text-base">
+                                เริ่มจากวาดรูปถังน้ำและก๊อกน้ำลงบนกระดาษ A4
+                                จากนั้นสำรวจความเครียดที่เกิดขึ้นกับตัวเองอย่างซื่อตรง
+                            </p>
+                            <ul class="mt-3 list-disc space-y-1.5 pl-5 text-sm text-[#3e453f] sm:text-base">
+                                <li>วาด <strong>ถังน้ำ</strong> และ <strong>ก๊อกระบาย</strong> ลงบนกระดาษ A4</li>
+                                <li>เขียนสิ่งที่ทำให้เครียด ภาระงาน หรือเรื่องที่กำลังแบกรับ ลงบน <span
+                                        class="font-semibold text-coraldark">Post-it สีแดง</span></li>
+                                <li>นำ Post-it สีแดงไปติดไว้ <strong>ภายในถังน้ำ</strong></li>
+                            </ul>
+                            <div class="mt-4 rounded-xl bg-paper px-4 py-3 text-sm text-forest">
+                                <strong>💬 คำถามชวนคิด:</strong> ช่วงนี้มีเรื่องอะไรบ้างที่กำลังเติมน้ำลงในถังของเรา?
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-5">
+                            <div class="grid min-h-[220px] place-items-center rounded-2xl bg-[#f8f5eb] p-6 text-center">
+                                <div>
+                                    <div class="text-5xl">🪣</div>
+                                    <p class="mt-2 font-kanit text-sm font-medium text-forest">วาดถังน้ำ แล้วติด Post-it
+                                        สีแดงไว้ด้านในถัง</p>
+                                    <div class="mt-4 flex flex-wrap justify-center gap-3">
+                                        <div
+                                            class="grid h-20 w-24 -rotate-3 place-items-center bg-[#f4a39a] p-2 text-xs font-semibold text-[#603c38] shadow-md">
+                                            งานเร่งด่วน
+                                        </div>
+                                        <div
+                                            class="grid h-20 w-24 rotate-2 place-items-center bg-[#f4a39a] p-2 text-xs font-semibold text-[#603c38] shadow-md">
+                                            ความคาดหวัง
+                                        </div>
+                                        <div
+                                            class="grid h-20 w-24 -rotate-2 place-items-center bg-[#f4a39a] p-2 text-xs font-semibold text-[#603c38] shadow-md">
+                                            เรื่องที่กังวล
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- STEP 2 -->
+                    <article
+                        class="grid grid-cols-1 items-center gap-7 rounded-3xl border border-sand bg-white p-6 shadow-soft sm:p-8 lg:grid-cols-12 print:shadow-none">
+                        <div class="order-2 lg:order-1 lg:col-span-5">
+                            <div class="grid min-h-[220px] place-items-center rounded-2xl bg-[#f8f5eb] p-6 text-center">
+                                <div>
+                                    <div class="text-5xl">🚰</div>
+                                    <p class="mt-2 font-kanit text-sm font-medium text-forest">Post-it
+                                        สีเขียวคือวิธีฮีลใจที่ปลายก๊อก</p>
+                                    <div class="mt-4 flex flex-wrap justify-center gap-3">
+                                        <div
+                                            class="grid h-20 w-24 rotate-3 place-items-center bg-[#bde5cb] p-2 text-xs font-semibold text-[#315a49] shadow-md">
+                                            ฟังเพลง
+                                        </div>
+                                        <div
+                                            class="grid h-20 w-24 -rotate-3 place-items-center bg-[#bde5cb] p-2 text-xs font-semibold text-[#315a49] shadow-md">
+                                            พักผ่อน
+                                        </div>
+                                        <div
+                                            class="grid h-20 w-24 rotate-2 place-items-center bg-[#bde5cb] p-2 text-xs font-semibold text-[#315a49] shadow-md">
+                                            คุยกับเพื่อน
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="order-1 lg:order-2 lg:col-span-7">
+                            <div class="inline-flex items-center gap-2.5 font-kanit text-sm font-bold text-forest">
+                                <span class="grid h-8 w-8 place-items-center rounded-full bg-sage text-white">2</span>
+                                <span>STEP 2 · UNPLUG</span>
+                            </div>
+                            <h3 class="mt-2 font-kanit text-2xl font-bold text-forest">ค้นหาก๊อกระบายความเครียด</h3>
+                            <p class="mt-2 text-sm text-muted sm:text-base">
+                                เมื่อรู้แล้วว่าอะไรทำให้ถังของเราเต็ม
+                                ขั้นต่อไปคือค้นหาสิ่งที่ช่วยให้ใจได้พักและกลับมามีพลังอีกครั้ง
+                            </p>
+                            <ul class="mt-3 list-disc space-y-1.5 pl-5 text-sm text-[#3e453f] sm:text-base">
+                                <li>เขียนสิ่งที่ชอบหรือกิจกรรมที่ทำแล้วมีความสุขลงบน <span
+                                        class="font-semibold text-forest">Post-it สีเขียว</span></li>
+                                <li>ตัวอย่างเช่น การนอน ฟังเพลง ออกกำลังกาย อ่านหนังสือ ทำอาหาร หรือพูดคุยกับเพื่อน</li>
+                                <li>นำ Post-it สีเขียวไปติดไว้บริเวณ <span
+                                        class="font-semibold text-skywater">ปลายก๊อกน้ำ</span>
+                                    เพื่อแทนวิธีระบายความเครียด</li>
+                            </ul>
+                            <div class="mt-4 rounded-xl bg-paper px-4 py-3 text-sm text-forest">
+                                <strong>💬 คำถามชวนคิด:</strong> อะไรคือสิ่งเล็ก ๆ ที่ช่วยให้เรารู้สึกดีขึ้นได้จริง?
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- STEP 3 -->
+                    <article
+                        class="grid grid-cols-1 items-center gap-7 rounded-3xl border border-sand bg-white p-6 shadow-soft sm:p-8 lg:grid-cols-12 print:shadow-none">
+                        <div class="lg:col-span-7">
+                            <div class="inline-flex items-center gap-2.5 font-kanit text-sm font-bold text-forest">
+                                <span
+                                    class="grid h-8 w-8 place-items-center rounded-full bg-skywater text-white">3</span>
+                                <span>STEP 3 · TEAM BOUNDARIES</span>
+                            </div>
+                            <h3 class="mt-2 font-kanit text-2xl font-bold text-forest">แบ่งปันวิธีฮีลใจ และสร้างกติกาทีม
+                            </h3>
+                            <p class="mt-2 text-sm text-muted sm:text-base">
+                                นำสิ่งที่ค้นพบจากตัวเองมาแลกเปลี่ยนกับเพื่อน
+                                เพื่อช่วยกันออกแบบสภาพแวดล้อมการทำงานที่ไม่ทำให้ถังของใครต้องล้น
+                            </p>
+                            <ul class="mt-3 list-disc space-y-1.5 pl-5 text-sm text-[#3e453f] sm:text-base">
+                                <li>แบ่งเป็น <strong>2 กลุ่ม กลุ่มละ 5 คน</strong></li>
+                                <li>ผลัดกันแชร์ <span class="font-semibold text-forest">เฉพาะ Post-it สีเขียว</span>
+                                    หรือวิธีฮีลใจให้เพื่อนฟัง เพื่อแลกเปลี่ยนไอเดียในการดูแลตัวเอง</li>
+                                <li>ร่วมกันกำหนดกติกาการทำงานด้วยแนวคิด <strong>Start / Stop / Continue</strong></li>
+                            </ul>
+                            <div class="mt-4 rounded-xl bg-paper px-4 py-3 text-sm text-forest">
+                                <strong>💬 คำถามชวนคิด:</strong> เราจะช่วยกันทำอย่างไร
+                                เพื่อไม่ให้ถังความเครียดของเพื่อนในกลุ่มล้น?
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-5">
+                            <div class="grid min-h-[220px] place-items-center rounded-2xl bg-[#f8f5eb] p-6 text-center">
+                                <div>
+                                    <div class="text-5xl">🤝</div>
+                                    <p class="mt-2 font-kanit text-sm font-medium text-forest">แบ่งปันวิธีดูแลใจ
+                                        และร่วมกันออกแบบกติกาทีม</p>
+                                    <div class="mt-4 flex flex-wrap justify-center gap-3">
+                                        <div
+                                            class="grid h-20 w-24 -rotate-3 place-items-center bg-[#bde5cb] p-2 text-xs font-semibold text-[#315a49] shadow-md">
+                                            รับฟังกัน
+                                        </div>
+                                        <div
+                                            class="grid h-20 w-24 rotate-2 place-items-center bg-[#bde5cb] p-2 text-xs font-semibold text-[#315a49] shadow-md">
+                                            เคารพเวลา
+                                        </div>
+                                        <div
+                                            class="grid h-20 w-24 -rotate-2 place-items-center bg-[#bde5cb] p-2 text-xs font-semibold text-[#315a49] shadow-md">
+                                            ช่วยเหลือกัน
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 06: ตารางกติกาทีม Start / Stop / Continue -->
+        <section id="team" class="bg-paper py-16 md:py-20 print:py-8">
+            <div class="mx-auto w-[92%] max-w-6xl">
+                <div class="max-w-3xl">
+                    <div class="text-xs font-bold tracking-[2px] text-sage uppercase">06 / TEAM AGREEMENT</div>
+                    <h2 class="mt-2 font-kanit text-3xl font-bold text-forest sm:text-4xl">ออกแบบกติกาทีมด้วย Start /
+                        Stop / Continue</h2>
+                    <p class="mt-2 text-muted">
+                        ให้สมาชิกแต่ละกลุ่มช่วยกันเสนอพฤติกรรมที่ควรเริ่ม หยุด และทำต่อเนื่อง
+                        เพื่อสร้างขอบเขตการทำงานร่วมกันที่ทุกคนยอมรับ
+                    </p>
+                </div>
+
+                <!-- 4 Cards: Start / Stop / Continue / Our Team -->
+                <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                    <div class="rounded-2xl border border-sand bg-white p-5 text-center shadow-card">
+                        <div class="font-playfair text-4xl font-bold text-[#48a77d]">S</div>
+                        <h3 class="mt-1 font-kanit text-lg font-semibold text-forest">START</h3>
+                        <p class="mt-1.5 text-sm text-muted">สิ่งที่อยากให้เริ่มทำ เช่น วางแผนงานร่วมกัน
+                            แจ้งกำหนดส่งให้ชัดเจน</p>
+                    </div>
+                    <div class="rounded-2xl border border-sand bg-white p-5 text-center shadow-card">
+                        <div class="font-playfair text-4xl font-bold text-coral">S</div>
+                        <h3 class="mt-1 font-kanit text-lg font-semibold text-forest">STOP</h3>
+                        <p class="mt-1.5 text-sm text-muted">สิ่งที่อยากให้หยุด เช่น มอบหมายงานนอกเวลางานโดยไม่จำเป็น
+                        </p>
+                    </div>
+                    <div class="rounded-2xl border border-sand bg-white p-5 text-center shadow-card">
+                        <div class="font-playfair text-4xl font-bold text-skywater">C</div>
+                        <h3 class="mt-1 font-kanit text-lg font-semibold text-forest">CONTINUE</h3>
+                        <p class="mt-1.5 text-sm text-muted">สิ่งที่ดีอยู่แล้วและอยากให้ทำต่อ เช่น รับฟังและช่วยเหลือกัน
+                        </p>
+                    </div>
+                    <div class="rounded-2xl border border-sand bg-white p-5 text-center shadow-card">
+                        <div class="font-playfair text-4xl font-bold text-sage">✎</div>
+                        <h3 class="mt-1 font-kanit text-lg font-semibold text-forest">OUR TEAM</h3>
+                        <p class="mt-1.5 text-sm text-muted">เปลี่ยนข้อเสนอให้เป็นข้อตกลงที่ชัดเจนและทำได้จริงร่วมกัน
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Interactive Team Agreement Table -->
+                <div class="mt-8 rounded-3xl border border-sand bg-white p-6 shadow-soft sm:p-8 print:shadow-none">
+                    <div class="flex flex-wrap items-center justify-between gap-4">
+                        <div>
+                            <h3 class="font-kanit text-2xl font-semibold text-forest">ตารางกติกาการทำงานร่วมกันของกลุ่ม
+                            </h3>
+                            <p class="mt-1 text-sm text-muted">
+                                คลิกที่ช่องว่างในตารางเพื่อพิมพ์ข้อสรุปของแต่ละกลุ่มได้ทันที
+                                หรือกดพิมพ์ใบงานเพื่อใช้ในห้องสัมมนา
+                            </p>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2 print:hidden">
+                            <button type="button" onclick="fillSampleTable()"
+                                class="rounded-full bg-mint px-4 py-2 text-xs font-semibold text-forest transition hover:bg-sage hover:text-white">
+                                ✨ เติมตัวอย่างไอเดีย
+                            </button>
+                            <button type="button" onclick="copyTableText()"
+                                class="rounded-full border border-sand bg-white px-4 py-2 text-xs font-semibold text-forest transition hover:bg-cream">
+                                📋 คัดลอกสรุป
+                            </button>
+                            <button type="button" onclick="clearTableText()"
+                                class="rounded-full border border-sand bg-white px-4 py-2 text-xs font-semibold text-muted transition hover:border-coral hover:text-coraldark">
+                                ล้างตาราง
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="mt-5 overflow-x-auto">
+                        <table id="agreementTable"
+                            class="w-full min-w-[640px] border-separate border-spacing-0 overflow-hidden rounded-2xl border border-sand text-left text-sm">
+                            <thead>
+                                <tr class="bg-forest font-kanit text-white">
+                                    <th class="w-40 border-b border-r border-white/20 px-4 py-3.5 font-semibold">หัวข้อ
+                                    </th>
+                                    <th class="border-b border-r border-white/20 px-4 py-3.5 font-semibold">กลุ่มที่ 1
+                                        (5 คน)</th>
+                                    <th class="border-b border-white/20 px-4 py-3.5 font-semibold">กลุ่มที่ 2 (5 คน)
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td
+                                        class="border-b border-r border-sand bg-[#fffdf8] px-4 py-4 align-top font-kanit font-semibold text-forest">
+                                        <span class="text-[#48a77d]">START</span><br>
+                                        <span class="text-xs font-normal text-muted">สิ่งที่ควรเริ่มทำ</span>
+                                    </td>
+                                    <td contenteditable="true" data-placeholder="คลิกเพื่อพิมพ์ข้อเสนอของกลุ่มที่ 1..."
+                                        aria-label="กลุ่มที่ 1 สิ่งที่ควรเริ่ม"
+                                        class="editable-cell h-24 border-b border-r border-sand bg-[#fffdf8] px-4 py-3.5 align-top text-ink focus:bg-mint/20 focus:outline-none empty:before:text-muted/50 empty:before:content-[attr(data-placeholder)]">
+                                    </td>
+                                    <td contenteditable="true" data-placeholder="คลิกเพื่อพิมพ์ข้อเสนอของกลุ่มที่ 2..."
+                                        aria-label="กลุ่มที่ 2 สิ่งที่ควรเริ่ม"
+                                        class="editable-cell h-24 border-b border-sand bg-[#fffdf8] px-4 py-3.5 align-top text-ink focus:bg-mint/20 focus:outline-none empty:before:text-muted/50 empty:before:content-[attr(data-placeholder)]">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td
+                                        class="border-b border-r border-sand bg-[#fffdf8] px-4 py-4 align-top font-kanit font-semibold text-forest">
+                                        <span class="text-coraldark">STOP</span><br>
+                                        <span class="text-xs font-normal text-muted">สิ่งที่ควรหยุดทำ</span>
+                                    </td>
+                                    <td contenteditable="true" data-placeholder="คลิกเพื่อพิมพ์ข้อเสนอของกลุ่มที่ 1..."
+                                        aria-label="กลุ่มที่ 1 สิ่งที่ควรหยุด"
+                                        class="editable-cell h-24 border-b border-r border-sand bg-[#fffdf8] px-4 py-3.5 align-top text-ink focus:bg-mint/20 focus:outline-none empty:before:text-muted/50 empty:before:content-[attr(data-placeholder)]">
+                                    </td>
+                                    <td contenteditable="true" data-placeholder="คลิกเพื่อพิมพ์ข้อเสนอของกลุ่มที่ 2..."
+                                        aria-label="กลุ่มที่ 2 สิ่งที่ควรหยุด"
+                                        class="editable-cell h-24 border-b border-sand bg-[#fffdf8] px-4 py-3.5 align-top text-ink focus:bg-mint/20 focus:outline-none empty:before:text-muted/50 empty:before:content-[attr(data-placeholder)]">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td
+                                        class="border-r border-sand bg-[#fffdf8] px-4 py-4 align-top font-kanit font-semibold text-forest">
+                                        <span class="text-skywater">CONTINUE</span><br>
+                                        <span class="text-xs font-normal text-muted">สิ่งที่ควรทำต่อเนื่อง</span>
+                                    </td>
+                                    <td contenteditable="true" data-placeholder="คลิกเพื่อพิมพ์ข้อเสนอของกลุ่มที่ 1..."
+                                        aria-label="กลุ่มที่ 1 สิ่งที่ควรทำต่อ"
+                                        class="editable-cell h-24 border-r border-sand bg-[#fffdf8] px-4 py-3.5 align-top text-ink focus:bg-mint/20 focus:outline-none empty:before:text-muted/50 empty:before:content-[attr(data-placeholder)]">
+                                    </td>
+                                    <td contenteditable="true" data-placeholder="คลิกเพื่อพิมพ์ข้อเสนอของกลุ่มที่ 2..."
+                                        aria-label="กลุ่มที่ 2 สิ่งที่ควรทำต่อ"
+                                        class="editable-cell h-24 bg-[#fffdf8] px-4 py-3.5 align-top text-ink focus:bg-mint/20 focus:outline-none empty:before:text-muted/50 empty:before:content-[attr(data-placeholder)]">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Closing Reflection Section -->
+        <section class="bg-forest py-16 text-center text-white md:py-20 print:bg-white print:text-forest">
+            <div class="mx-auto w-[92%] max-w-4xl">
+                <div class="text-xs font-bold tracking-[2px] text-mint uppercase">REFLECTION &amp; TAKEAWAY</div>
+                <h2 class="mt-2 font-kanit text-3xl font-bold sm:text-4xl">ดูแลถังของตัวเอง
+                    และไม่เติมน้ำล้นให้ถังของเพื่อน</h2>
+                <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-[#e0f1e9] sm:text-base print:text-muted">
+                    ความเครียดเป็นเรื่องธรรมชาติที่เกิดขึ้นได้กับทุกคน แต่เราเลือกที่จะรู้ทันและเปิด “ก๊อกระบาย”
+                    ให้ตัวเองได้เสมอ
+                    เมื่อทุกคนในทีมเคารพขอบเขตและพร้อมรับฟังกัน
+                    การทำงานร่วมกันก็จะกลายเป็นพื้นที่ปลอดภัยที่เติบโตไปด้วยกันอย่างมีความสุข
+                </p>
+                <div class="mt-6 font-playfair text-2xl italic text-[#d0f2e2] sm:text-4xl print:text-forest">
+                    “Empty your bucket before it overflows.”
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-sand bg-paper py-7 text-center text-xs text-muted">
+        <div class="mx-auto w-[92%] max-w-6xl">
+            <p class="font-medium text-forest">โครงการสัมมนาเชิงปฏิบัติการ Refresh &amp; Restart: The Stress Bucket</p>
+            <p class="mt-1">เอกสารประกอบการดำเนินโครงการและคู่มือกิจกรรม Workshop ·
+                ออกแบบเพื่อการเรียนรู้และดูแลสุขภาวะทางใจ</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Logic -->
+    <script>
+        // 1. Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        }
+
+        // 2. Custom Toast Notification Helper (ไม่ใช้ alert/confirm)
+        let toastTimer = null;
+        function showToast(message) {
+            const banner = document.getElementById('toastBanner');
+            const textEl = document.getElementById('toastMessage');
+            if (!banner || !textEl) return;
+
+            textEl.textContent = message;
+            banner.classList.remove('hidden');
+            banner.classList.add('flex');
+
+            if (toastTimer) clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                banner.classList.add('hidden');
+                banner.classList.remove('flex');
+            }, 3000);
+        }
+
+        // 3. Interactive Stress Bucket Simulator
+        let waterLevel = 45; // ค่าเริ่มต้น 45%
+
+        function updateBucketVisual(isDraining = false) {
+            const waterRect = document.getElementById('simWaterRect');
+            const wavePath = document.getElementById('simWave');
+            const percentText = document.getElementById('simPercentText');
+            const badge = document.getElementById('bucketBadge');
+            const statusText = document.getElementById('bucketStatus');
+            const droplet = document.getElementById('simDroplet');
+
+            // คำนวณตำแหน่ง Y ของน้ำในถัง (ช่วง Y: 75 ถึง 235)
+            const topY = 235 - (waterLevel / 100) * 155;
+            const height = 250 - topY;
+
+            if (waterRect) {
+                waterRect.setAttribute('y', topY.toFixed(1));
+                waterRect.setAttribute('height', Math.max(10, height).toFixed(1));
+                // เปลี่ยนสีน้ำตามระดับความเครียด
+                if (waterLevel >= 80) {
+                    waterRect.setAttribute('fill', '#f18f83');
+                } else if (waterLevel >= 60) {
+                    waterRect.setAttribute('fill', '#f3b76b');
+                } else {
+                    waterRect.setAttribute('fill', '#63c2d3');
+                }
+            }
+
+            if (wavePath) {
+                const y = topY.toFixed(1);
+                wavePath.setAttribute('d', `M55 ${y} Q107 ${topY - 9} 160 ${y} T265 ${y}`);
+            }
+
+            if (percentText) {
+                percentText.textContent = `${waterLevel}%`;
+            }
+
+            // แสดงหยดน้ำออกจากก๊อกเมื่อกดเปิดก๊อกระบาย
+            if (droplet) {
+                if (isDraining && waterLevel > 0) {
+                    droplet.classList.remove('opacity-0');
+                    droplet.classList.add('opacity-100');
+                    setTimeout(() => {
+                        droplet.classList.remove('opacity-100');
+                        droplet.classList.add('opacity-0');
+                    }, 900);
+                }
+            }
+
+            // อัปเดตข้อความสถานะ
+            if (badge && statusText) {
+                if (waterLevel >= 80) {
+                    badge.textContent = `ใกล้ล้นถัง! (${waterLevel}%)`;
+                    badge.className = 'rounded-full bg-coral/20 px-2.5 py-0.5 text-coraldark';
+                    statusText.textContent = 'คำเตือน: น้ำความเครียดใกล้ล้นถังแล้ว! ควรหยุดพัก สื่อสารขอความช่วยเหลือจากทีม และเปิดก๊อกฮีลใจทันที';
+                } else if (waterLevel >= 60) {
+                    badge.textContent = `เริ่มตึงเครียด (${waterLevel}%)`;
+                    badge.className = 'rounded-full bg-amber-100 px-2.5 py-0.5 text-amber-800';
+                    statusText.textContent = 'น้ำในถังเริ่มสูงขึ้น ลองจัดลำดับความสำคัญของงาน และหาเวลาทำกิจกรรม Post-it สีเขียวสัก 15–30 นาที';
+                } else if (waterLevel >= 25) {
+                    badge.textContent = `สมดุลกำลังดี (${waterLevel}%)`;
+                    badge.className = 'rounded-full bg-mint px-2.5 py-0.5 text-forest';
+                    statusText.textContent = 'ระดับน้ำอยู่ในเกณฑ์สมดุล มีพื้นที่รับมือกับเรื่องต่าง ๆ ได้ดี แต่อย่าลืมเปิดก๊อกพักผ่อนอย่างสม่ำเสมอ';
+                } else {
+                    badge.textContent = `ผ่อนคลายโปร่งสบาย (${waterLevel}%)`;
+                    badge.className = 'rounded-full bg-skywater/20 px-2.5 py-0.5 text-skywater';
+                    statusText.textContent = 'ถังความเครียดเบาสบาย พลังใจเต็มเปี่ยม พร้อมสำหรับเรียนรู้และแบ่งปันพลังบวกให้กับเพื่อนในทีม';
+                }
+            }
+        }
+
+        function adjustBucket(delta) {
+            waterLevel = Math.min(100, Math.max(5, waterLevel + delta));
+            updateBucketVisual(delta < 0);
+        }
+
+        function resetBucket() {
+            waterLevel = 45;
+            updateBucketVisual(false);
+            showToast('รีเซ็ตระดับน้ำในถังกลับสู่ค่าเริ่มต้น (45%)');
+        }
+
+        // 4. Interactive Team Agreement Table Controls
+        function fillSampleTable() {
+            const cells = document.querySelectorAll('#agreementTable .editable-cell');
+            const samples = [
+                '• แจ้งความคืบหน้างานสั้น ๆ ทุกวันศุกร์\n• เช็กพลังใจเพื่อนในทีมก่อนเริ่มประชุม',
+                '• กำหนดเดดไลน์ย่อยล่วงหน้าอย่างน้อย 2 วัน\n• แบ่งหน้าที่ตามความถนัดอย่างชัดเจน',
+                '• หยุดส่งข้อความตามงานหลังเวลา 20:00 น. (ยกเว้นเรื่องเร่งด่วน)\n• หยุดเปรียบเทียบผลงานตนเองกับผู้อื่น',
+                '• หยุดรับงานแทรกโดยไม่ปรึกษาสมาชิกในกลุ่ม\n• หยุดตำหนิเมื่อเกิดความผิดพลาดแต่ช่วยกันแก้',
+                '• รับฟังความคิดเห็นของทุกคนอย่างเปิดใจ\n• ชื่นชมและให้กำลังใจเมื่อเพื่อนทำงานสำเร็จ',
+                '• ช่วยเหลือและแบ่งเบาภาระเมื่อเห็นเพื่อนงานล้นมือ\n• รักษาบรรยากาศการทำงานที่เป็นกันเอง'
+            ];
+
+            cells.forEach((cell, idx) => {
+                if (samples[idx]) {
+                    cell.innerText = samples[idx];
+                }
+            });
+            showToast('เติมตัวอย่างกติกาทีมเรียบร้อย สามารถแก้ไขข้อความได้ทันที');
+        }
+
+        function clearTableText() {
+            const cells = document.querySelectorAll('#agreementTable .editable-cell');
+            cells.forEach(cell => {
+                cell.innerText = '';
+            });
+            showToast('ล้างข้อมูลในตารางเรียบร้อยแล้ว');
+        }
+
+        function copyTableText() {
+            const rows = document.querySelectorAll('#agreementTable tbody tr');
+            let summary = 'สรุปกติกาการทำงานร่วมกัน (Start / Stop / Continue)\n========================================\n';
+
+            rows.forEach(row => {
+                const topic = row.cells[0]?.innerText.replace(/\n/g, ' ') || '';
+                const g1 = row.cells[1]?.innerText.trim() || '-';
+                const g2 = row.cells[2]?.innerText.trim() || '-';
+                summary += `\n[${topic}]\n- กลุ่มที่ 1: ${g1}\n- กลุ่มที่ 2: ${g2}\n`;
+            });
+
+            const tempTextarea = document.createElement('textarea');
+            tempTextarea.value = summary;
+            document.body.appendChild(tempTextarea);
+            tempTextarea.select();
+            try {
+                document.execCommand('copy');
+                showToast('คัดลอกสรุปกติกาทีมลงคลิปบอร์ดแล้ว');
+            } catch (err) {
+                showToast('ไม่สามารถคัดลอกอัตโนมัติได้ กรุณาเลือกข้อความเพื่อคัดลอก');
+            }
+            document.body.removeChild(tempTextarea);
+        }
+
+        // Initialize Simulator on Page Load
+        window.addEventListener('DOMContentLoaded', () => {
+            updateBucketVisual(false);
+        });
+    </script>
+</body>
+
+</html>

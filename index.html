@@ -1,0 +1,942 @@
+<!doctype html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Refresh & Restart | สรุปงานสัมมนาย่อย</title>
+    <meta name="description"
+        content="เว็บไซต์สรุปงานสัมมนาย่อย Refresh & Restart: เคลียร์พื้นที่ความเครียด อัปเกรดพลังใจในการทำงาน">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --ink: #172b32;
+            --muted: #61747a;
+            --teal: #176c69;
+            --mint: #dff1e9;
+            --lime: #c9e7a5;
+            --orange: #e9a36c;
+            --paper: #fbfaf6;
+            --line: #e5e9e4;
+            --white: #fff
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            margin: 0;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: 'Sarabun', sans-serif;
+            line-height: 1.7
+        }
+
+        h1,
+        h2,
+        h3,
+        .brand {
+            font-family: 'Kanit', sans-serif
+        }
+
+        a {
+            color: inherit
+        }
+
+        .wrap {
+            width: min(1120px, 92%);
+            margin: auto
+        }
+
+        .top {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: #fbfaf6ed;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line)
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            min-height: 68px
+        }
+
+        .brand {
+            font-weight: 600;
+            letter-spacing: .2px;
+            color: var(--teal);
+            font-size: 20px
+        }
+
+        .navlinks {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap
+        }
+
+        .navlinks a {
+            text-decoration: none;
+            font-size: 14px;
+            color: #41565a
+        }
+
+        .navlinks a:hover {
+            color: var(--teal)
+        }
+
+        .menu {
+            display: none;
+            border: 0;
+            background: none;
+            font-size: 24px
+        }
+
+        .hero {
+            padding: 54px 0 64px;
+            background: radial-gradient(circle at 82% 18%, #e8f2d7 0, transparent 28%), linear-gradient(130deg, #e3f1e9, #f8f4e9 62%, #f5e5d4);
+            overflow: hidden
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 42px;
+            align-items: center
+        }
+
+        .eyebrow {
+            color: var(--teal);
+            font-weight: 700;
+            letter-spacing: 2px;
+            font-size: 13px
+        }
+
+        .hero h1 {
+            font-size: clamp(36px, 5vw, 60px);
+            line-height: 1.16;
+            margin: 12px 0 8px
+        }
+
+        .hero h1 span {
+            color: var(--teal)
+        }
+
+        .subtitle {
+            font-size: 20px;
+            max-width: 620px;
+            color: #42595b;
+            margin: 12px 0 24px
+        }
+
+        .meta {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0
+        }
+
+        .pill {
+            background: #ffffffb8;
+            border: 1px solid #d8e5dc;
+            border-radius: 99px;
+            padding: 7px 14px;
+            font-size: 14px
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 11px 19px;
+            border-radius: 10px;
+            text-decoration: none;
+            border: 1px solid var(--teal);
+            background: var(--teal);
+            color: white;
+            font-weight: 600;
+            cursor: pointer
+        }
+
+        .btn.alt {
+            background: transparent;
+            color: var(--teal)
+        }
+
+        .poster {
+            background: #fff;
+            border-radius: 22px;
+            padding: 30px;
+            box-shadow: 0 22px 55px #244c3b20;
+            transform: rotate(1deg);
+            position: relative;
+            min-height: 340px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid #e5e9dc
+        }
+
+        .poster:before {
+            content: "";
+            position: absolute;
+            right: -24px;
+            top: -24px;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--lime);
+            z-index: -1
+        }
+
+        .poster .small {
+            letter-spacing: 3px;
+            color: var(--teal);
+            font-weight: 700;
+            font-size: 12px
+        }
+
+        .poster h2 {
+            font-size: 43px;
+            line-height: 1.12;
+            margin: 15px 0
+        }
+
+        .poster h2 em {
+            font-style: normal;
+            color: var(--teal)
+        }
+
+        .poster p {
+            margin: 0;
+            color: #53696a
+        }
+
+        .poster-art {
+            display: flex;
+            gap: 8px;
+            align-items: end;
+            margin-top: 18px
+        }
+
+        .bubble {
+            border-radius: 100px 100px 20px 20px;
+            background: var(--mint);
+            height: 76px;
+            flex: 1
+        }
+
+        .bubble:nth-child(2) {
+            height: 112px;
+            background: #d5e7ad
+        }
+
+        .bubble:nth-child(3) {
+            height: 91px;
+            background: #f4d5b7
+        }
+
+        .section {
+            padding: 76px 0
+        }
+
+        .section.altbg {
+            background: #f0f5ef
+        }
+
+        .section-head {
+            max-width: 720px;
+            margin-bottom: 30px
+        }
+
+        .kicker {
+            color: var(--teal);
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 1.8px
+        }
+
+        .section h2 {
+            font-size: 34px;
+            line-height: 1.25;
+            margin: 7px 0 10px
+        }
+
+        .lead {
+            color: var(--muted);
+            font-size: 17px
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: 0 8px 24px #173d3310
+        }
+
+        .card h3 {
+            margin: 4px 0 8px;
+            font-size: 20px
+        }
+
+        .num {
+            font-family: 'Kanit';
+            font-size: 28px;
+            color: var(--teal)
+        }
+
+        .topic {
+            border-top: 3px solid var(--lime)
+        }
+
+        .topic:nth-child(2) {
+            border-color: var(--orange)
+        }
+
+        .topic:nth-child(3) {
+            border-color: #87b7b0
+        }
+
+        .topic p {
+            color: var(--muted);
+            font-size: 14px
+        }
+
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 36px;
+            align-items: start
+        }
+
+        .list {
+            padding-left: 20px
+        }
+
+        .list li {
+            margin: 8px 0
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px
+        }
+
+        .gallery button {
+            padding: 0;
+            border: 0;
+            background: none;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 12px;
+            aspect-ratio: 4/3
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: .3s
+        }
+
+        .gallery button:hover img {
+            transform: scale(1.05)
+        }
+
+        .docgrid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px
+        }
+
+        .doc {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 18px
+        }
+
+        .doc .ico {
+            font-size: 24px
+        }
+
+        .doc p {
+            color: var(--muted);
+            font-size: 14px;
+            margin: 4px 0 12px
+        }
+
+        .doc a,
+        .doc button {
+            font-weight: 600;
+            color: var(--teal);
+            background: none;
+            border: 0;
+            padding: 0;
+            text-decoration: underline;
+            cursor: pointer;
+            font-family: inherit
+        }
+
+        .notice {
+            background: #fff7e9;
+            border-left: 4px solid var(--orange);
+            padding: 14px 18px;
+            border-radius: 8px;
+            color: #725536;
+            margin: 18px 0
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px
+        }
+
+        .stat {
+            background: white;
+            border: 1px solid var(--line);
+            padding: 20px;
+            border-radius: 14px
+        }
+
+        .stat strong {
+            display: block;
+            font: 600 34px Kanit;
+            color: var(--teal)
+        }
+
+        .barrow {
+            display: grid;
+            grid-template-columns: 150px 1fr 42px;
+            gap: 12px;
+            align-items: center;
+            margin: 13px 0
+        }
+
+        .bar {
+            height: 12px;
+            border-radius: 20px;
+            background: #e8eee8;
+            overflow: hidden
+        }
+
+        .bar i {
+            display: block;
+            height: 100%;
+            background: var(--teal);
+            border-radius: 20px
+        }
+
+        .formbox {
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 24px
+        }
+
+        .formgrid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px
+        }
+
+        .field label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px
+        }
+
+        .field input,
+        .field select,
+        .field textarea {
+            width: 100%;
+            border: 1px solid #d5dfd8;
+            border-radius: 9px;
+            padding: 11px;
+            font: inherit;
+            background: #fff
+        }
+
+        .field.full {
+            grid-column: 1/-1
+        }
+
+        .field textarea {
+            min-height: 90px
+        }
+
+        .formbox button {
+            margin-top: 14px
+        }
+
+        .team {
+            display: flex;
+            gap: 16px;
+            align-items: center
+        }
+
+        .avatar {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: var(--mint);
+            display: grid;
+            place-items: center;
+            font: 600 20px Kanit;
+            color: var(--teal)
+        }
+
+        footer {
+            background: #173d3b;
+            color: #eaf3ed;
+            padding: 34px 0
+        }
+
+        footer p {
+            color: #c3d5cd;
+            margin: 5px 0
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #081b1bdc;
+            z-index: 30;
+            align-items: center;
+            justify-content: center;
+            padding: 20px
+        }
+
+        .lightbox.open {
+            display: flex
+        }
+
+        .lightbox img {
+            max-width: min(100%, 1000px);
+            max-height: 85vh;
+            border-radius: 12px
+        }
+
+        .lightbox button {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            color: white;
+            background: none;
+            border: 0;
+            font-size: 32px;
+            cursor: pointer
+        }
+
+        .smallnote {
+            font-size: 13px;
+            color: var(--muted)
+        }
+
+        @media(max-width:800px) {
+
+            .hero-grid,
+            .split {
+                grid-template-columns: 1fr
+            }
+
+            .poster {
+                max-width: 500px
+            }
+
+            .cards,
+            .docgrid {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .gallery {
+                grid-template-columns: repeat(3, 1fr)
+            }
+
+            .navlinks {
+                display: none;
+                position: absolute;
+                top: 68px;
+                left: 0;
+                right: 0;
+                background: var(--paper);
+                padding: 18px 5%;
+                border-bottom: 1px solid var(--line)
+            }
+
+            .navlinks.show {
+                display: grid
+            }
+
+            .menu {
+                display: block
+            }
+        }
+
+        @media(max-width:540px) {
+
+            .cards,
+            .docgrid,
+            .stats {
+                grid-template-columns: 1fr
+            }
+
+            .gallery {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .formgrid {
+                grid-template-columns: 1fr
+            }
+
+            .field.full {
+                grid-column: auto
+            }
+
+            .barrow {
+                grid-template-columns: 105px 1fr 30px
+            }
+
+            .section {
+                padding: 55px 0
+            }
+
+            .hero {
+                padding: 38px 0
+            }
+
+            .poster h2 {
+                font-size: 36px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    </nav>
+    <header class="top">
+        <div class="wrap nav"><a class="brand" href="#home">R&R <span style="color:#e9a36c">●</span> SEMINAR</a><button
+                class="menu" onclick="document.querySelector('.navlinks').classList.toggle('show')"
+                aria-label="เปิดเมนู">☰</button>
+            <nav class="navlinks"><a href="#about">เกี่ยวกับงาน</a><a href="#gallery">ภาพกิจกรรม</a><a
+                    href="#documents">เอกสาร</a><a href="#results">สรุปผล</a><a href="#team">ผู้จัดทำ</a><a
+                    href="#contact">ติดต่อ</a></nav>
+        </div>
+    </header>
+    <main id="home">
+        <section class="hero">
+            <div class="wrap hero-grid">
+                <div>
+                    <div class="eyebrow">ITD481 · SEMINAR SUMMARY</div>
+                    <h1>Refresh <span>&</span><br>Restart</h1>
+                    <p class="subtitle">เคลียร์พื้นที่ความเครียด อัปเกรดพลังใจในการทำงาน</p>
+                    <div class="meta"><span class="pill">📅 11 ตุลาคม 2569</span><span class="pill">👥 ผู้เข้าร่วมตามแผน
+                            10 คน</span><span class="pill">⏱️ กิจกรรม 3 ชั่วโมง</span></div>
+                    <p>พื้นที่เรียนรู้และแลกเปลี่ยนแนวทางดูแลสุขภาวะใจ สำรวจแหล่งความเครียด เติมพลังให้ตัวเอง
+                        และร่วมออกแบบกติกาทีมที่ช่วยให้ทำงานได้อย่างสมดุล</p>
+                    <div class="actions"><a class="btn" href="#about">รู้จักงานสัมมนา</a><a class="btn alt"
+                            href="#documents">ดูเอกสารประกอบ</a></div>
+                </div>
+                <div class="poster">
+                    <div>
+                        <div class="small">WORKPLACE WELL-BEING WORKSHOP</div>
+                        <h2>Refresh<br><em>& Restart</em></h2>
+                        <p>เคลียร์พื้นที่ความเครียด<br>อัปเกรดพลังใจในการทำงาน</p>
+                    </div>
+                    <div>
+                        <div class="poster-art">
+                            <div class="bubble"></div>
+                            <div class="bubble"></div>
+                            <div class="bubble"></div>
+                        </div>
+                        <div
+                            style="display:flex;justify-content:space-between;margin-top:14px;font-size:13px;color:#526b63">
+                            <b>11 OCT 2026</b><b>ITD481 · TEAM B</b></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section" id="about">
+            <div class="wrap">
+                <div class="section-head">
+                    <div class="kicker">ABOUT THE SEMINAR</div>
+                    <h2>เริ่มต้นจากการเข้าใจความเครียด</h2>
+                    <p class="lead">การทำงานที่เชื่อมต่ออยู่ตลอดเวลาอาจทำให้เส้นแบ่งระหว่างงานและชีวิตส่วนตัวลดลง
+                        กิจกรรมนี้จึงออกแบบให้ผู้เข้าร่วมได้สำรวจสิ่งที่ทำให้เกิดความเครียด
+                        เลือกวิธีฟื้นพลังที่เหมาะกับตนเอง และร่วมกันปรับสภาพแวดล้อมการทำงาน</p>
+                </div>
+                <div class="cards">
+                    <article class="card">
+                        <div class="num">01</div>
+                        <h3>เข้าใจ Burnout</h3>
+                        <p>เรียนรู้ความเครียดและภาวะหมดไฟ พร้อมประเมินสัญญาณของตนเองในเบื้องต้น</p>
+                    </article>
+                    <article class="card">
+                        <div class="num">02</div>
+                        <h3>Stress Bucket Model</h3>
+                        <p>สำรวจสิ่งที่เติมความเครียดลงในถัง และค้นหาวิธีระบายหรือฟื้นฟูพลังใจ</p>
+                    </article>
+                    <article class="card">
+                        <div class="num">03</div>
+                        <h3>Team Boundaries</h3>
+                        <p>ร่วมกันสร้างข้อตกลงการทำงาน ลดความซ้ำซ้อนและแรงกดดันที่ทีมปรับได้</p>
+                    </article>
+                </div>
+                <div class="split" style="margin-top:34px">
+                    <div>
+                        <h3>วัตถุประสงค์</h3>
+                        <ul class="list">
+                            <li>ส่งเสริมความเข้าใจเรื่องความเครียดและภาวะหมดไฟ</li>
+                            <li>ให้ผู้เข้าร่วมรู้จักแนวทางจัดการความเครียดที่เหมาะกับตน</li>
+                            <li>ส่งเสริม Work-Life Balance และการทำงานที่เน้นคุณภาพ</li>
+                            <li>สร้างแนวทางการทำงานร่วมกันที่ช่วยลดปัจจัยกดดัน</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>รูปแบบกิจกรรม 3 ชั่วโมง</h3>
+                        <ol class="list">
+                            <li>เตรียมความพร้อมและปูพื้นฐาน — 45 นาที</li>
+                            <li>เวิร์กชอปสำรวจตัวเอง — 45 นาที</li>
+                            <li>สนทนาและสร้างข้อตกลงทีม — 60 นาที</li>
+                            <li>สรุปผลและทำลายข้อมูลส่วนตัว — 15 นาที</li>
+                            <li>พักเบรก — 15 นาที</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section altbg" id="gallery">
+            <div class="wrap">
+                <div class="section-head">
+                    <div class="kicker">SEMINAR MOMENTS</div>
+                    <h2>ภาพบรรยากาศการจัดสัมมนา</h2>
+                    <p class="lead">ภาพการบรรยาย การทำกิจกรรมกลุ่ม การแลกเปลี่ยนความคิดเห็น
+                        และการมีส่วนร่วมของผู้เข้าร่วม</p>
+                </div>
+                <div class="gallery" id="galleryGrid"></div>
+                <p class="smallnote">ภาพถ่ายจากชุดภาพประกอบที่แนบมากับงานสัมมนา · แตะภาพเพื่อขยาย</p>
+                <div class="notice">ยังไม่พบไฟล์วิดีโอในชุดไฟล์ที่ส่งมา
+                    สามารถเพิ่มวิดีโอภายหลังได้โดยวางไฟล์ไว้ในโฟลเดอร์ assets แล้วเพิ่มส่วนแสดงผลในหน้านี้</div>
+            </div>
+        </section>
+        <section class="section" id="documents">
+            <div class="wrap">
+                <div class="section-head">
+                    <div class="kicker">SEMINAR MATERIALS</div>
+                    <h2>เอกสารประกอบการสัมมนา</h2>
+                    <p class="lead">รวมเอกสารโครงการ เนื้อหาประกอบ และแบบฟอร์มสำหรับผู้เข้าร่วม</p>
+                </div>
+                <div class="docgrid">
+                    <div class="doc">
+                        <div class="ico">📘</div>
+                        <h3>โครงการสัมมนา</h3>
+                        <p>ที่มา วัตถุประสงค์ กลุ่มเป้าหมาย และแผนการดำเนินกิจกรรม</p><a href="the_stress_bucket.html">ดูหัวข้อเนื้อหา</a><button
+                            onclick="printSection('project')"> เปิด </button>
+                    </div>
+                    <div class="doc">
+                        <div class="ico">🖥️</div>
+                        <h3>สไลด์การสัมมนา</h3>
+                        <p>เนื้อหา Stress Bucket, Burnout และ Team Boundaries</p><a href="Refresh _ Restart Presentation.pdf">ดูหัวข้อเนื้อหา</a>
+                    </div>
+                    <div class="doc">
+                        <div class="ico">📝</div>
+                        <h3>รายงานการประชุม</h3>
+                        <p>สรุปประเด็นแลกเปลี่ยนและข้อตกลงของทีม</p><a href="#summary">ดูส่วนสรุปกิจกรรม</a>
+                    </div>
+                    <div class="doc">
+                        <div class="ico">🧾</div>
+                        <h3>ฟอร์มลงทะเบียน</h3>
+                        <p>บันทึกข้อมูลผู้เข้าร่วมสัมมนา</p><a href="https://docs.google.com/forms/d/e/1FAIpQLSccKMfBh4UPxGhCBS6o47S2B9ljIVK6M20VDSdaXK6R0kDnMw/viewform">กรอกแบบฟอร์ม</a>
+                    </div>
+                    <div class="doc">
+                        <div class="ico">⭐</div>
+                        <h3>ฟอร์มประเมินการสัมมนา</h3>
+                        <p>ประเมินประสบการณ์และข้อเสนอแนะหลังเข้าร่วม</p><a href="https://docs.google.com/forms/d/e/1FAIpQLSfPBBqzhvRDilCwSoNlKMODI7_BXW2SZ-9MCVATXLB0X05YpA/formResponse">กรอกแบบประเมิน</a>
+                    </div>                    
+                </div>
+                <div class="notice">หมายเหตุ: ในไฟล์แนบมีข้อมูลใบงานและภาพกิจกรรม แต่ยังไม่มีไฟล์สไลด์ฉบับจริง โครงการ
+                    PDF รายงานการประชุม หรือผลแบบทดสอบก่อน–หลัง หน้านี้จึงจัดเตรียมส่วนแสดงผลและแบบฟอร์มตัวอย่างไว้
+                    โดยไม่สร้างผลลัพธ์ที่ไม่มีข้อมูลรองรับ</div>
+                <div id="project" class="card" style="margin-top:20px">
+                    <h3>รายละเอียดโครงการ (จากใบงาน)</h3>
+                    <p><b>ชื่อกิจกรรม:</b> Refresh & Restart: เคลียร์พื้นที่ความเครียด อัปเกรดพลังใจในการทำงาน</p>
+                    <p><b>แนวทาง:</b> ใช้แนวคิดถังความเครียด (Stress Bucket Model) ประกอบกิจกรรมสำรวจตนเอง
+                        การแบ่งปันวิธีฟื้นพลัง และการร่วมออกแบบกติกาทีม</p>
+                    <p><b>ผลที่คาดหวัง:</b> ผู้เข้าร่วมรู้จักการบริหารความเครียด ปรับสมดุลชีวิตและงาน
+                        และนำแนวทางไปใช้ได้จริง</p>
+                </div>
+                
+                
+            </div>
+        </section>
+        <section class="section altbg" id="results">
+            <div class="wrap">
+                <div class="section-head">
+                    <div class="kicker">OUTCOMES & SUMMARY</div>
+                    <h2>สรุปผลการสัมมนา</h2>
+                    <p class="lead">แสดงเฉพาะข้อมูลที่มีอยู่ในเอกสารต้นทาง
+                        และแยกข้อมูลที่ยังต้องรวบรวมเพิ่มเติมอย่างชัดเจน</p>
+                </div>
+                <div class="stats">
+                    <div class="stat"><span>ผู้เข้าร่วมตามแผน</span><strong>10
+                            คน</strong><small>จำนวนเป้าหมายในแผนกิจกรรม</small></div>
+                    <div class="stat"><span>จำนวนภาพกิจกรรม</span><strong>31
+                            ภาพ</strong><small>จากชุดไฟล์ภาพที่แนบ</small></div>
+                    <div class="stat"><span>คะแนนประเมินที่มีในใบงาน</span><strong>5 ชุด</strong><small>คะแนนรายการ
+                            C1–C5 สำหรับ 3 หัวข้อ</small></div>
+                </div>
+                <div class="card" style="margin-top:22px">
+                    <h3>คะแนนที่ปรากฏในใบงาน (มาตราส่วน 1–5)</h3>
+                    <p class="smallnote">คำนวณค่าเฉลี่ยจากคะแนน C1–C5 ที่แนบมา ไม่ระบุว่าเป็นคะแนนความพึงพอใจด้านใด
+                        เนื่องจากไม่มีคำอธิบายเกณฑ์คะแนนในชุดข้อมูล</p>
+                    <div class="barrow"><span>หัวข้อที่ 1</span>
+                        <div class="bar"><i style="width:76%"></i></div><b>3.8</b>
+                    </div>
+                    <div class="barrow"><span>หัวข้อที่ 2</span>
+                        <div class="bar"><i style="width:72%"></i></div><b>3.6</b>
+                    </div>
+                    <div class="barrow"><span>หัวข้อที่ 3</span>
+                        <div class="bar"><i style="width:64%"></i></div><b>3.2</b>
+                    </div>
+                </div>
+                <div class="split" style="margin-top:22px">
+                    <div class="card">
+                        <h3>ประเด็นสรุปจากกิจกรรม</h3>
+                        <ul class="list">
+                            <li>สำรวจสิ่งที่เพิ่มความเครียดและกิจกรรมที่ช่วยฟื้นพลัง</li>
+                            <li>แลกเปลี่ยนแนวทางดูแลตนเองโดยสมัครใจ</li>
+                            <li>ร่วมกันออกแบบกติกาทีม เช่น เวลาตอบข้อความนอกเวลางานและรูปแบบประสานงาน</li>
+                            <li>เน้นการรักษาความลับและทำลายกระดาษที่มีข้อมูลส่วนตัว</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>ข้อมูลที่ยังต้องนำเข้า</h3>
+                        <ul class="list">
+                            <li>จำนวนผู้ลงทะเบียนและผู้เข้าร่วมจริง</li>
+                            <li>ผลการประเมินฉบับเต็มและข้อเสนอแนะ</li>
+                            <li>คะแนนก่อน–หลังของผู้เข้าร่วมจริง</li>
+                            <li>ผลแบบสังเกตพฤติกรรม (ถ้ามี)</li>
+                            <li>รายงานการประชุมและข้อตกลงทีมฉบับสมบูรณ์</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="summary" class="notice">ข้อควรทราบ: ยังไม่มีข้อมูลผลลงทะเบียนจริง ผลแบบประเมินครบชุด หรือคะแนน
+                    Pre-test / Post-test ในไฟล์ที่ได้รับ จึงไม่แสดงจำนวนหรือเปอร์เซ็นต์สมมติ</div>
+            </div>
+        </section>
+        <section class="section" id="team">
+            <div class="wrap">
+                <div class="section-head">
+                    <div class="kicker">THE ORGANIZING TEAM</div>
+                    <h2>คณะผู้จัดทำ</h2>
+                    <p class="lead">ทีมผู้จัดทำโครงการสัมมนาย่อย รายวิชา ITD481</p>
+                </div>
+                <div class="card team">
+                    <div class="avatar">B</div>
+                    <div>
+                        <h3 style="margin:0">Team B</h3>
+                        <p style="margin:2px 0;color:var(--muted)">นายสุริยาพงษ์ แสนบ้าน : 691202609 (ประธาน)
+                        </p>
+                    </div>
+                </div>
+                <div class="card team">
+                    <div class="avatar">B</div>
+                    <div>
+                        <h3 style="margin:0">Team B</h3>
+                        <p style="margin:2px 0;color:var(--muted)">นายจีระศักดิ์ สาระจันทร์ : 681202128 (รองประธาน) 
+                        </p>
+                    </div>
+                </div>
+                <div class="card team">
+                    <div class="avatar">B</div>
+                    <div>
+                        <h3 style="margin:0">Team B</h3>
+                        <p style="margin:2px 0;color:var(--muted)">นายนลธวัช ฤกษ์เนตรี 681203661 (เลขา)
+                        </p>
+                    </div>
+                </div><div class="card team">
+                    <div class="avatar">B</div>
+                    <div>
+                        <h3 style="margin:0">Team B</h3>
+                        <p style="margin:2px 0;color:var(--muted)">นายกฤษดา ศรีรักษา 691201695 (เหรัญิก)
+                        </p>
+                    </div>
+                </div><div class="card team">
+                    <div class="avatar">B</div>
+                    <div>
+                        <h3 style="margin:0">Team B</h3>
+                        <p style="margin:2px 0;color:var(--muted)">นายวรชัย ผิวขาว 691202609 (ปฏิคม)
+                        </p>
+                    </div>
+                </div>
+                <p class="smallnote">ไฟล์ข้อมูลต้นทางระบุชื่อผู้จัดทำเป็น “Team B” เท่านั้น
+                    หากต้องการแสดงรายชื่อสมาชิกแต่ละคน กรุณาเพิ่มชื่อและหน้าที่ของสมาชิกในส่วนนี้</p>
+            </div>
+        </section>
+        <section class="section altbg" id="contact">
+            <div class="wrap">
+                <div class="section-head">
+                    <div class="kicker">CONTACT</div>
+                    <h2>ติดต่อผู้ดำเนินโครงการ</h2>
+                    <p class="lead">สอบถามข้อมูลเพิ่มเติมเกี่ยวกับกิจกรรม เอกสาร และการประสานงาน</p>
+                </div>
+                <div class="card">
+                    <h3>ผู้ประสานงานโครงการ: Team B</h3>
+                    <p>นายกฤษดา ศรีรักษา : 691201695@northbkk.ac.th</p>
+                    <p>นายวรชัย ผิวขาว : 691202609@northbkk.ac.th</p>
+                    <p class="smallnote">ยังไม่มีอีเมล เบอร์โทรศัพท์ หรือบัญชีโซเชียลของผู้ดำเนินโครงการในไฟล์ต้นทาง
+                        กรุณาแก้ไขข้อมูลติดต่อก่อนเผยแพร่เว็บไซต์จริง</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="wrap">
+            <div class="brand" style="color:#d9efdc">REFRESH & RESTART</div>
+            <p>เคลียร์พื้นที่ความเครียด อัปเกรดพลังใจในการทำงาน</p>
+            <p>เว็บไซต์สรุปงานสัมมนาย่อย · ITD481 · Team B · 11 ตุลาคม 2569</p>
+        </div>
+    </footer>
+    <div class="lightbox" id="lightbox" onclick="this.classList.remove('open')"><button aria-label="ปิด">×</button><img
+            alt="ภาพบรรยากาศสัมมนา" id="lightboxImg"></div>
+    <script>
+        const photos = ["LINE_ALBUM_สัมมนา 181069_261115_1.jpg", "LINE_ALBUM_สัมมนา 181069_261115_2.jpg", "LINE_ALBUM_สัมมนา 181069_261115_3.jpg", "LINE_ALBUM_สัมมนา 181069_261115_4.jpg", "LINE_ALBUM_สัมมนา 181069_261115_5.jpg", "LINE_ALBUM_สัมมนา 181069_261115_6.jpg", "LINE_ALBUM_สัมมนา 181069_261115_7.jpg", "LINE_ALBUM_สัมมนา 181069_261115_8.jpg", "LINE_ALBUM_สัมมนา 181069_261115_9.jpg", "LINE_ALBUM_สัมมนา 181069_261115_10.jpg", "LINE_ALBUM_สัมมนา 181069_261115_11.jpg", "LINE_ALBUM_สัมมนา 181069_261115_12.jpg", "LINE_ALBUM_สัมมนา 181069_261115_13.jpg", "LINE_ALBUM_สัมมนา 181069_261115_14.jpg", "LINE_ALBUM_สัมมนา 181069_261115_15.jpg", "LINE_ALBUM_สัมมนา 181069_261115_16.jpg", "LINE_ALBUM_สัมมนา 181069_261115_17.jpg", "LINE_ALBUM_สัมมนา 181069_261115_18.jpg", "LINE_ALBUM_สัมมนา 181069_261115_19.jpg", "LINE_ALBUM_สัมมนา 181069_261115_20.jpg", "LINE_ALBUM_สัมมนา 181069_261115_21.jpg", "LINE_ALBUM_สัมมนา 181069_261115_22.jpg", "LINE_ALBUM_สัมมนา 181069_261115_23.jpg", "LINE_ALBUM_สัมมนา 181069_261115_24.jpg", "LINE_ALBUM_สัมมนา 181069_261115_25.jpg", "LINE_ALBUM_สัมมนา 181069_261115_26.jpg", "LINE_ALBUM_สัมมนา 181069_261115_27.jpg", "LINE_ALBUM_สัมมนา 181069_261115_28.jpg", "LINE_ALBUM_สัมมนา 181069_261115_29.jpg", "LINE_ALBUM_สัมมนา 181069_261115_30.jpg", "LINE_ALBUM_สัมมนา 181069_261115_31.jpg"];
+        const grid = document.getElementById('galleryGrid');
+        photos.forEach(file => {const b = document.createElement('button'); const im = document.createElement('img'); im.src = 'assets/gallery/' + file; im.alt = 'ภาพกิจกรรมสัมมนา ' + file; im.loading = 'lazy'; b.appendChild(im); b.onclick = () => {document.getElementById('lightboxImg').src = im.src; document.getElementById('lightbox').classList.add('open')}; grid.appendChild(b)});
+        function printSection(id) {const el = document.getElementById(id); const w = window.open('', '_blank'); w.document.write('<html lang="th"><meta charset="utf-8"><title>รายละเอียดโครงการ</title><body style="font-family:sans-serif;line-height:1.8;padding:30px">' + el.innerHTML + '</body></html>'); w.document.close(); w.print()}
+        ['registration', 'evaluation'].forEach(id => document.getElementById(id).addEventListener('submit', e => {e.preventDefault(); const obj = Object.fromEntries(new FormData(e.target).entries()); const key = 'rr_' + id; const rows = JSON.parse(localStorage.getItem(key) || '[]'); rows.push({...obj, savedAt: new Date().toISOString()}); localStorage.setItem(key, JSON.stringify(rows)); alert('บันทึกข้อมูลในเบราว์เซอร์นี้แล้ว (' + rows.length + ' รายการ)'); e.target.reset()}));
+        document.getElementById('quizForm').addEventListener('submit', e => {e.preventDefault(); const f = new FormData(e.target); if (!f.get('q1') || !f.get('q2') || !f.get('q3')) {alert('กรุณาตอบคำถามให้ครบ'); return } const score = ['q1', 'q2', 'q3'].reduce((s, k) => s + Number(f.get(k)), 0); document.getElementById('quizResult').textContent = 'คะแนน ' + score + '/3 · ' + f.get('phase')});
+        
+    </script>
+</body>
+
+</html>
